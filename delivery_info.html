@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Delivery Information | Beauty In Black{% endblock %}
+
+{% block content %}
+<div style="background: linear-gradient(135deg, #2C1810 0%, #6B3F2A 60%, #C9A96E 100%); padding: 50px 0 35px;">
+  <div class="container text-center text-light">
+    <h1 style="font-family: 'Cormorant Garamond', serif; font-size: 3rem; color: #fff;">Delivery Information</h1>
+    <p class="mb-0" style="color: #f0d9c0;">Fast and reliable shipping across the UK.</p>
+  </div>
+</div>
+
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-9">
+
+      <h4 style="font-family: 'Cormorant Garamond', serif; color: var(--bib-purple);">Shipping Methods & Rates</h4>
+      <div class="mb-4">
+          <h6 style="font-family: 'Jost', sans-serif; font-weight: 500; color: var(--text-primary);">Standard UK Delivery</h6>
+          <p class="text-muted" style="font-size: 0.95rem;">£3.99 (Free on orders over £50). Delivered within 2-4 working days.</p>
+          
+          <h6 style="font-family: 'Jost', sans-serif; font-weight: 500; color: var(--text-primary); margin-top: 20px;">Next-Day Express Delivery</h6>
+          <p class="text-muted" style="font-size: 0.95rem;">£6.99. Available for orders placed before 2 PM Monday–Thursday. Orders placed on Friday will be delivered on Monday.</p>
+      </div>
+
+      <hr class="my-4" style="border-color: var(--border-color);">
+
+      <h4 style="font-family: 'Cormorant Garamond', serif; color: var(--bib-purple);">Dispatch & Tracking</h4>
+      <div class="mb-4">
+          <h6 style="font-family: 'Jost', sans-serif; font-weight: 500; color: var(--text-primary);">When will my order ship?</h6>
+          <p class="text-muted" style="font-size: 0.95rem;">Most orders are processed and dispatched within 24 hours. You will receive an email confirmation with tracking details as soon as it leaves our warehouse.</p>
+          
+          <h6 style="font-family: 'Jost', sans-serif; font-weight: 500; color: var(--text-primary); margin-top: 20px;">How do I track my parcel?</h6>
+          <p class="text-muted" style="font-size: 0.95rem;">You can track your order using the link provided in your shipping email or by visiting your <a href="{% url 'orders' %}" style="color: var(--bib-purple);">Order History</a>.</p>
+      </div>
+
+      <hr class="my-4" style="border-color: var(--border-color);">
+
+      <div class="text-center mt-5">
+        <p class="text-muted">Need help with a delivery?</p>
+        <a href="{% url 'contact' %}" class="btn px-4 py-2" style="background: var(--bib-brown-dark); color: var(--bib-gold-light); font-family: 'Jost', sans-serif; text-transform: uppercase; font-size: 0.85rem; border-radius: 0;">Contact Support</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

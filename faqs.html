@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Frequently Asked Questions | Beauty In Black{% endblock %}
+
+{% block content %}
+<div style="background: linear-gradient(135deg, #2C1810 0%, #6B3F2A 60%, #C9A96E 100%); padding: 50px 0 35px;">
+  <div class="container text-center text-light">
+    <h1 style="font-family: 'Cormorant Garamond', serif; font-size: 3rem; color: #fff;">Frequently Asked Questions</h1>
+    <p class="mb-0" style="color: #f0d9c0;">Got questions? We have answers.</p>
+  </div>
+</div>
+
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-9">
+
+      <h4 style="font-family: 'Cormorant Garamond', serif; color: var(--bib-purple);">Delivery & Tracking</h4>
+      <div class="mb-4">
+          <h6 style="font-family: 'Jost', sans-serif; font-weight: 500; color: var(--text-primary);">How long does delivery take?</h6>
+          <p class="text-muted" style="font-size: 0.95rem;">Standard delivery within the UK takes 2-4 working days. We also offer next-day delivery for orders placed before 2 PM Monday–Thursday.</p>
+          
+          <h6 style="font-family: 'Jost', sans-serif; font-weight: 500; color: var(--text-primary); margin-top: 20px;">How do I track my order?</h6>
+          <p class="text-muted" style="font-size: 0.95rem;">Once your order is dispatched, you will receive a tracking link via email. You can also view your order status by logging into your <a href="{% url 'orders' %}" style="color: var(--bib-purple);">My Account</a> dashboard.</p>
+      </div>
+
+      <hr class="my-4" style="border-color: var(--border-color);">
+
+      <h4 style="font-family: 'Cormorant Garamond', serif; color: var(--bib-purple);">Returns & Refunds</h4>
+      <div class="mb-4">
+          <h6 style="font-family: 'Jost', sans-serif; font-weight: 500; color: var(--text-primary);">What is your returns policy?</h6>
+          <p class="text-muted" style="font-size: 0.95rem;">We accept returns on unopened and unused items within 30 days of delivery. For hygiene reasons, we cannot accept returns on opened wigs, hair extensions, or skincare products. Read our full <a href="{% url 'returns_policy' %}" style="color: var(--bib-purple);">Returns Policy here</a>.</p>
+          
+          <h6 style="font-family: 'Jost', sans-serif; font-weight: 500; color: var(--text-primary); margin-top: 20px;">How long do refunds take?</h6>
+          <p class="text-muted" style="font-size: 0.95rem;">Once we receive your returned item, your refund will be processed to your original payment method (via Stripe) within 5-10 business days.</p>
+      </div>
+
+      <hr class="my-4" style="border-color: var(--border-color);">
+
+      <h4 style="font-family: 'Cormorant Garamond', serif; color: var(--bib-purple);">Our Products</h4>
+      <div class="mb-4">
+          <h6 style="font-family: 'Jost', sans-serif; font-weight: 500; color: var(--text-primary);">Are your products authentic?</h6>
+          <p class="text-muted" style="font-size: 0.95rem;">Yes, 100%. We source all of our products directly from the brands or their official UK distributors to ensure premium quality and authenticity for our customers.</p>
+          
+          <h6 style="font-family: 'Jost', sans-serif; font-weight: 500; color: var(--text-primary); margin-top: 20px;">I don't know what my hair type is. Can you help?</h6>
+          <p class="text-muted" style="font-size: 0.95rem;">Absolutely! Feel free to drop us an email via our <a href="{% url 'contact' %}" style="color: var(--bib-purple);">Contact Page</a> with a description or photo of your hair, and our team will recommend the best products for your crown.</p>
+      </div>
+
+      <hr class="my-4" style="border-color: var(--border-color);">
+
+      <div class="text-center mt-5">
+        <p class="text-muted">Still can't find what you're looking for?</p>
+        <a href="{% url 'contact' %}" class="btn px-4 py-2" style="background: var(--bib-brown-dark); color: var(--bib-gold-light); font-family: 'Jost', sans-serif; text-transform: uppercase; font-size: 0.85rem; border-radius: 0;">Contact Us</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

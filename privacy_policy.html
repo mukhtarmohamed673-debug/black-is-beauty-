@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Privacy Policy | Black Is Beauty{% endblock %}
+
+{% block content %}
+<div style="background: linear-gradient(135deg, #2C1810 0%, #6B3F2A 60%, #C9A96E 100%); padding: 50px 0 35px;">
+  <div class="container text-center text-light">
+    <h1 style="font-family: 'Cormorant Garamond', serif; font-size: 3rem; color: #fff;">Privacy Policy</h1>
+    <p class="mb-0" style="color: #f0d9c0;">How we protect and manage your data.</p>
+  </div>
+</div>
+
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-9">
+
+      <h4 style="font-family: 'Cormorant Garamond', serif; color: var(--bib-purple);">1. Information We Collect</h4>
+      <div class="mb-4">
+          <p class="text-muted" style="font-size: 0.95rem;">
+              When you visit Black Is Beauty, we collect information necessary to process your orders and improve your experience. This includes:
+          </p>
+          <ul class="text-muted" style="font-size: 0.95rem; line-height: 1.8;">
+              <li><strong>Personal Details:</strong> Name, email address, phone number, and shipping address.</li>
+              <li><strong>Payment Information:</strong> Processed securely via <strong>Stripe</strong>. We do not store your full card details on our servers.</li>
+              <li><strong>Technical Data:</strong> IP address and browser type collected via cookies to optimize site performance.</li>
+          </ul>
+      </div>
+
+      <hr class="my-4" style="border-color: var(--border-color);">
+
+      <h4 style="font-family: 'Cormorant Garamond', serif; color: var(--bib-purple);">2. How We Use Your Data</h4>
+      <div class="mb-4">
+          <p class="text-muted" style="font-size: 0.95rem;">
+              Your data allows us to:
+          </p>
+          <ul class="text-muted" style="font-size: 0.95rem; line-height: 1.8;">
+              <li>Process and fulfill your orders for our premium hair and beauty products.</li>
+              <li>Send order tracking updates and customer support responses.</li>
+              <li>Improve our website layout and product selection based on user behavior.</li>
+              <li>Send marketing emails (only if you have explicitly opted-in via our newsletter form).</li>
+          </ul>
+      </div>
+
+      <hr class="my-4" style="border-color: var(--border-color);">
+
+      <h4 style="font-family: 'Cormorant Garamond', serif; color: var(--bib-purple);">3. Third-Party Services</h4>
+      <div class="mb-4">
+          <p class="text-muted" style="font-size: 0.95rem;">
+              We never sell your data. However, we share necessary information with trusted partners to run our store:
+          </p>
+          <ul class="text-muted" style="font-size: 0.95rem; line-height: 1.8;">
+              <li><strong>Stripe:</strong> To securely process your payments.</li>
+              <li><strong>Courier Services:</strong> To deliver your parcels to your doorstep.</li>
+              <li><strong>Google Analytics:</strong> To understand how visitors use our site.</li>
+          </ul>
+      </div>
+
+      <hr class="my-4" style="border-color: var(--border-color);">
+
+      <h4 style="font-family: 'Cormorant Garamond', serif; color: var(--bib-purple);">4. Your Rights</h4>
+      <div class="mb-4">
+          <p class="text-muted" style="font-size: 0.95rem;">
+              Under UK GDPR, you have the right to access, correct, or request the deletion of your personal information at any time. To exercise these rights, please contact our data privacy officer via the form below.
+          </p>
+      </div>
+
+      <div class="text-center mt-5">
+        <p class="text-muted">Questions about your data?</p>
+        <a href="{% url 'contact' %}" class="btn px-4 py-2" style="background: var(--bib-brown-dark); color: var(--bib-gold-light); font-family: 'Jost', sans-serif; text-transform: uppercase; font-size: 0.85rem; border-radius: 0;">Contact Data Officer</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

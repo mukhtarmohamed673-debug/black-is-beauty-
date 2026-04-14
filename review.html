@@ -1,0 +1,205 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Leave a Review | Beauty in Black{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center" style="padding: 40px 0 60px;">
+    <div class="col-md-8 col-lg-6">
+
+        <div style="text-align:center;margin-bottom:36px;">
+            <span class="eyebrow">Your Voice Matters</span>
+            <h2 style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--brown-dark);margin-bottom:8px;">Leave a Review</h2>
+            <span class="divider" style="display:block;width:40px;height:2px;background:var(--gold);margin:0 auto 12px;"></span>
+            {% if product %}
+            <p style="color:var(--text-muted);font-size:0.9rem;">You are reviewing: <strong style="color:var(--brown-dark);">{{ product.name }}</strong></p>
+            {% endif %}
+        </div>
+
+        {% if error %}
+        <div class="alert alert-danger" style="margin-bottom:24px;">{{ error }}</div>
+        {% endif %}
+
+        <div class="card shadow-sm" style="border:1px solid rgba(201,169,110,0.3);border-radius:4px;">
+            <div class="card-body p-4">
+
+                <form method="post" action="{% url 'review' %}">
+                    {% csrf_token %}
+
+                    {% if product %}
+                    <input type="hidden" name="product_id" value="{{ product.id }}">
+                    {% else %}
+                    <div class="mb-4">
+                        <label style="font-family:'Jost',sans-serif;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--brown-dark);display:block;margin-bottom:8px;">
+                            Product ID <span style="color:#c0392b;">*</span>
+                        </label>
+                        <input type="text" name="product_id" class="form-control"
+                               style="border:1px solid rgba(201,169,110,0.4);border-radius:3px;"
+                               placeholder="Enter the product ID" required>
+                    </div>
+                    {% endif %}
+
+                    <!-- FIELD 1: Overall Rating (radio) -->
+                    <div class="mb-4">
+                        <label style="font-family:'Jost',sans-serif;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--brown-dark);display:block;margin-bottom:10px;">
+                            Overall Rating <span style="color:#c0392b;">*</span>
+                        </label>
+                        <div style="display:flex;gap:24px;flex-wrap:wrap;">
+                            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:0.9rem;color:var(--brown-dark);">
+                                <input type="radio" name="overall_rating" value="strongly_like"
+                                       style="accent-color:var(--gold);" required>
+                                <i class="fas fa-star" style="color:var(--gold);"></i> Strongly Like
+                            </label>
+                            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:0.9rem;color:var(--brown-dark);">
+                                <input type="radio" name="overall_rating" value="like"
+                                       style="accent-color:var(--gold);">
+                                <i class="fas fa-thumbs-up" style="color:var(--gold);"></i> Like
+                            </label>
+                            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:0.9rem;color:var(--brown-dark);">
+                                <input type="radio" name="overall_rating" value="strongly_dislike"
+                                       style="accent-color:var(--gold);">
+                                <i class="fas fa-thumbs-down" style="color:#b03a2e;"></i> Strongly Dislike
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- FIELD 2: Quality Rating (radio) -->
+                    <div class="mb-4">
+                        <label style="font-family:'Jost',sans-serif;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--brown-dark);display:block;margin-bottom:10px;">
+                            Product Quality
+                        </label>
+                        <div style="display:flex;gap:24px;flex-wrap:wrap;">
+                            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:0.9rem;color:var(--brown-dark);">
+                                <input type="radio" name="quality_rating" value="strongly_like"
+                                       style="accent-color:var(--gold);">
+                                <i class="fas fa-star" style="color:var(--gold);"></i> Strongly Like
+                            </label>
+                            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:0.9rem;color:var(--brown-dark);">
+                                <input type="radio" name="quality_rating" value="like"
+                                       style="accent-color:var(--gold);">
+                                <i class="fas fa-thumbs-up" style="color:var(--gold);"></i> Like
+                            </label>
+                            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:0.9rem;color:var(--brown-dark);">
+                                <input type="radio" name="quality_rating" value="strongly_dislike"
+                                       style="accent-color:var(--gold);">
+                                <i class="fas fa-thumbs-down" style="color:#b03a2e;"></i> Strongly Dislike
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- FIELD 3: Value Rating (radio) -->
+                    <div class="mb-4">
+                        <label style="font-family:'Jost',sans-serif;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--brown-dark);display:block;margin-bottom:10px;">
+                            Value for Money
+                        </label>
+                        <div style="display:flex;gap:24px;flex-wrap:wrap;">
+                            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:0.9rem;color:var(--brown-dark);">
+                                <input type="radio" name="value_rating" value="strongly_like"
+                                       style="accent-color:var(--gold);">
+                                <i class="fas fa-star" style="color:var(--gold);"></i> Strongly Like
+                            </label>
+                            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:0.9rem;color:var(--brown-dark);">
+                                <input type="radio" name="value_rating" value="like"
+                                       style="accent-color:var(--gold);">
+                                <i class="fas fa-thumbs-up" style="color:var(--gold);"></i> Like
+                            </label>
+                            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:0.9rem;color:var(--brown-dark);">
+                                <input type="radio" name="value_rating" value="strongly_dislike"
+                                       style="accent-color:var(--gold);">
+                                <i class="fas fa-thumbs-down" style="color:#b03a2e;"></i> Strongly Dislike
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- FIELD 4: Delivery Rating (radio) -->
+                    <div class="mb-4">
+                        <label style="font-family:'Jost',sans-serif;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--brown-dark);display:block;margin-bottom:10px;">
+                            Delivery Experience
+                        </label>
+                        <div style="display:flex;gap:24px;flex-wrap:wrap;">
+                            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:0.9rem;color:var(--brown-dark);">
+                                <input type="radio" name="delivery_rating" value="strongly_like"
+                                       style="accent-color:var(--gold);">
+                                <i class="fas fa-star" style="color:var(--gold);"></i> Strongly Like
+                            </label>
+                            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:0.9rem;color:var(--brown-dark);">
+                                <input type="radio" name="delivery_rating" value="like"
+                                       style="accent-color:var(--gold);">
+                                <i class="fas fa-thumbs-up" style="color:var(--gold);"></i> Like
+                            </label>
+                            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:0.9rem;color:var(--brown-dark);">
+                                <input type="radio" name="delivery_rating" value="strongly_dislike"
+                                       style="accent-color:var(--gold);">
+                                <i class="fas fa-thumbs-down" style="color:#b03a2e;"></i> Strongly Dislike
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- FIELD 5: Review Title (text) -->
+                    <div class="mb-4">
+                        <label style="font-family:'Jost',sans-serif;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--brown-dark);display:block;margin-bottom:8px;">
+                            Review Title <span style="color:#c0392b;">*</span>
+                        </label>
+                        <input type="text" name="title" class="form-control" maxlength="200"
+                               style="border:1px solid rgba(201,169,110,0.4);border-radius:3px;"
+                               placeholder="Summarise your experience in a few words" required>
+                    </div>
+
+                    <!-- FIELD 6: Your Review (text, capped at 2000 chars) -->
+                    <div class="mb-4">
+                        <label style="font-family:'Jost',sans-serif;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--brown-dark);display:block;margin-bottom:8px;">
+                            Your Review <span style="color:#c0392b;">*</span>
+                        </label>
+                        <textarea name="body" class="form-control" rows="5" maxlength="2000"
+                                  id="reviewBody"
+                                  style="border:1px solid rgba(201,169,110,0.4);border-radius:3px;resize:vertical;"
+                                  placeholder="Tell us what you loved, or what you think we could improve..."
+                                  oninput="updateCharCount(this)" required></textarea>
+                        <small style="color:var(--text-muted);font-size:0.75rem;">
+                            <span id="charCount">0</span> / 2000 characters
+                        </small>
+                    </div>
+
+                    <!-- FIELD 7: Would you recommend this? (text) -->
+                    <div class="mb-4">
+                        <label style="font-family:'Jost',sans-serif;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--brown-dark);display:block;margin-bottom:8px;">
+                            Would You Recommend This Product?
+                        </label>
+                        <input type="text" name="recommend" class="form-control" maxlength="300"
+                               style="border:1px solid rgba(201,169,110,0.4);border-radius:3px;"
+                               placeholder="e.g. Yes, perfect for natural hair routines">
+                    </div>
+
+                    <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+                        <button type="submit"
+                                style="background:var(--gold);color:var(--brown-dark);font-family:'Jost',sans-serif;font-size:0.78rem;letter-spacing:0.14em;text-transform:uppercase;padding:13px 32px;border:none;cursor:pointer;transition:opacity 0.2s;">
+                            Submit Review
+                        </button>
+                        <a href="{% url 'homepage' %}"
+                           style="font-family:'Jost',sans-serif;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);text-decoration:none;">
+                            Cancel
+                        </a>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function updateCharCount(el) {
+    var count = el.value.length;
+    document.getElementById('charCount').textContent = count;
+    if (count > 1800) {
+        document.getElementById('charCount').style.color = '#c0392b';
+    } else {
+        document.getElementById('charCount').style.color = 'var(--text-muted)';
+    }
+}
+</script>
+{% endblock %}

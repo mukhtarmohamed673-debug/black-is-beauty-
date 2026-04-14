@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Sitemap | Beauty In Black{% endblock %}
+
+{% block content %}
+<div style="background: linear-gradient(135deg, #2C1810 0%, #6B3F2A 60%, #C9A96E 100%); padding: 50px 0 35px;">
+  <div class="container text-center text-light">
+    <h1 style="font-family: 'Cormorant Garamond', serif; font-size: 3rem;">Sitemap</h1>
+    <p class="mb-0" style="color: #f0d9c0;">Find everything on our site, all in one place.</p>
+  </div>
+</div>
+
+<div class="container py-5">
+  <div class="row">
+
+    <div class="col-md-4 mb-4">
+      <h5 class="text-uppercase mb-3" style="color: #6A1B9A; letter-spacing: 1px; border-bottom: 2px solid #6A1B9A; padding-bottom: 8px;">
+        <i class="fas fa-store mr-2"></i> Shop
+      </h5>
+      <ul class="list-unstyled">
+        <li class="mb-2"><a href="{% url 'homepage' %}" class="text-dark text-decoration-none"><i class="fas fa-chevron-right mr-2 small text-muted"></i>Home</a></li>
+        <li class="mb-2"><a href="{% url 'homepage' %}" class="text-dark text-decoration-none"><i class="fas fa-chevron-right mr-2 small text-muted"></i>All Products</a></li>
+        <li class="mb-2"><a href="{% url 'homepage' %}?category=hair-wigs" class="text-dark text-decoration-none"><i class="fas fa-chevron-right mr-2 small text-muted"></i>Hair &amp; Wigs</a></li>
+        <li class="mb-2"><a href="{% url 'homepage' %}?category=skincare" class="text-dark text-decoration-none"><i class="fas fa-chevron-right mr-2 small text-muted"></i>Skincare</a></li>
+        <li class="mb-2"><a href="{% url 'homepage' %}?category=makeup" class="text-dark text-decoration-none"><i class="fas fa-chevron-right mr-2 small text-muted"></i>Makeup</a></li>
+        <li class="mb-2"><a href="{% url 'homepage' %}?category=mens" class="text-dark text-decoration-none"><i class="fas fa-chevron-right mr-2 small text-muted"></i>Mens</a></li>
+        <li class="mb-2"><a href="{% url 'homepage' %}?category=kids" class="text-dark text-decoration-none"><i class="fas fa-chevron-right mr-2 small text-muted"></i>Kids</a></li>
+        <li class="mb-2"><a href="{% url 'homepage' %}?category=accessories" class="text-dark text-decoration-none"><i class="fas fa-chevron-right mr-2 small text-muted"></i>Accessories</a></li>
+      </ul>
+    </div>
+
+    <div class="col-md-4 mb-4">
+      <h5 class="text-uppercase mb-3" style="color: #6A1B9A; letter-spacing: 1px; border-bottom: 2px solid #6A1B9A; padding-bottom: 8px;">
+        <i class="fas fa-user mr-2"></i> My Account
+      </h5>
+      <ul class="list-unstyled">
+        <li class="mb-2"><a href="{% url 'login' %}" class="text-dark text-decoration-none"><i class="fas fa-chevron-right mr-2 small text-muted"></i>Sign In</a></li>
+        <li class="mb-2"><a href="{% url 'signup' %}" class="text-dark text-decoration-none"><i class="fas fa-chevron-right mr-2 small text-muted"></i>Create Account</a></li>
+        <li class="mb-2"><a href="{% url 'orders' %}" class="text-dark text-decoration-none"><i class="fas fa-chevron-right mr-2 small text-muted"></i>My Orders</a></li>
+        <li class="mb-2"><a href="{% url 'cart' %}" class="text-dark text-decoration-none"><i class="fas fa-chevron-right mr-2 small text-muted"></i>My Bag</a></li>
+        <li class="mb-2"><a href="{% url 'wishlist' %}" class="text-dark text-decoration-none"><i class="fas fa-chevron-right mr-2 small text-muted"></i>My Wishlist</a></li>
+      </ul>
+    </div>
+
+    <div class="col-md-4 mb-4">
+      <h5 class="text-uppercase mb-3" style="color: #6A1B9A; letter-spacing: 1px; border-bottom: 2px solid #6A1B9A; padding-bottom: 8px;">
+        <i class="fas fa-info-circle mr-2"></i> Information
+      </h5>
+      <ul class="list-unstyled">
+        <li class="mb-2"><a href="{% url 'about_us' %}" class="text-dark text-decoration-none"><i class="fas fa-chevron-right mr-2 small text-muted"></i>About Us</a></li>
+        <li class="mb-2"><a href="{% url 'contact' %}" class="text-dark text-decoration-none"><i class="fas fa-chevron-right mr-2 small text-muted"></i>Contact Us</a></li>
+        <li class="mb-2"><a href="{% url 'returns_policy' %}" class="text-dark text-decoration-none"><i class="fas fa-chevron-right mr-2 small text-muted"></i>Returns Policy</a></li>
+        <li class="mb-2"><a href="{% url 'terms' %}" class="text-dark text-decoration-none"><i class="fas fa-chevron-right mr-2 small text-muted"></i>Terms &amp; Conditions</a></li>
+        <li class="mb-2"><a href="{% url 'cookie_policy' %}" class="text-dark text-decoration-none"><i class="fas fa-chevron-right mr-2 small text-muted"></i>Cookie Policy</a></li>
+        <li class="mb-2"><a href="{% url 'sitemap' %}" class="text-dark text-decoration-none"><i class="fas fa-chevron-right mr-2 small text-muted"></i>Sitemap</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Cookie Policy | Beauty In Black{% endblock %}
+
+{% block content %}
+<div style="background: linear-gradient(135deg, #2C1810 0%, #6B3F2A 60%, #C9A96E 100%); padding: 50px 0 35px;">
+  <div class="container text-center text-light">
+    <h1 style="font-family: 'Cormorant Garamond', serif; font-size: 3rem;">Cookie Policy</h1>
+    <p class="mb-0" style="color: #f0d9c0;">Last updated: April 2026</p>
+  </div>
+</div>
+
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-9">
+
+      <p class="text-muted mb-5">
+        This Cookie Policy explains how Beauty In Black uses cookies and similar tracking technologies when you visit our website. By continuing to use our site, you consent to our use of cookies as described below.
+      </p>
+
+      <h4 style="font-family: 'Cormorant Garamond', serif; color: #6A1B9A;">What Are Cookies?</h4>
+      <p class="text-muted">
+        Cookies are small text files stored on your device by your web browser when you visit a website. They are widely used to make websites work more efficiently, remember your preferences, and provide information to website owners.
+      </p>
+
+      <hr class="my-4">
+
+      <h4 style="font-family: 'Cormorant Garamond', serif; color: #6A1B9A;">Cookies We Use</h4>
+
+      <div class="table-responsive mt-3">
+        <table class="table table-bordered text-muted" style="font-size: 0.9rem;">
+          <thead style="background: #f8f4f0;">
+            <tr>
+              <th>Cookie Name</th>
+              <th>Type</th>
+              <th>Purpose</th>
+              <th>Duration</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>sessionid</code></td>
+              <td>Essential</td>
+              <td>Maintains your login session</td>
+              <td>2 weeks</td>
+            </tr>
+            <tr>
+              <td><code>csrftoken</code></td>
+              <td>Essential</td>
+              <td>Protects against cross-site request forgery attacks</td>
+              <td>1 year</td>
+            </tr>
+            <tr>
+              <td><code>cart_session</code></td>
+              <td>Functional</td>
+              <td>Remembers items in your shopping bag</td>
+              <td>Session</td>
+            </tr>
+            <tr>
+              <td><code>_stripe_*</code></td>
+              <td>Payment</td>
+              <td>Used by Stripe to process payments securely</td>
+              <td>Session</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <hr class="my-4">
+
+      <h4 style="font-family: 'Cormorant Garamond', serif; color: #6A1B9A;">Essential Cookies</h4>
+      <p class="text-muted">
+        These cookies are necessary for the website to function correctly. They enable core features like staying logged in, keeping items in your bag, and processing payments securely. You cannot opt out of essential cookies.
+      </p>
+
+      <hr class="my-4">
+
+      <h4 style="font-family: 'Cormorant Garamond', serif; color: #6A1B9A;">Functional Cookies</h4>
+      <p class="text-muted">
+        These cookies remember choices you make (such as your preferred language or region) to provide a more personalised experience. They are not strictly necessary but improve usability.
+      </p>
+
+      <hr class="my-4">
+
+      <h4 style="font-family: 'Cormorant Garamond', serif; color: #6A1B9A;">Third-Party Cookies</h4>
+      <p class="text-muted">
+        We use Stripe for payment processing. Stripe may set cookies on your device to prevent fraud and verify transactions. Please refer to <a href="https://stripe.com/gb/privacy" target="_blank" style="color: #6A1B9A;">Stripe's Privacy Policy</a> for more information.
+      </p>
+
+      <hr class="my-4">
+
+      <h4 style="font-family: 'Cormorant Garamond', serif; color: #6A1B9A;">Managing Cookies</h4>
+      <p class="text-muted">
+        You can control and delete cookies through your browser settings. Please be aware that disabling cookies may affect the functionality of our website — for example, you may not be able to stay logged in or complete a purchase.
+      </p>
+      <p class="text-muted">
+        For guidance on managing cookies in your browser, visit <a href="https://www.allaboutcookies.org" target="_blank" style="color: #6A1B9A;">allaboutcookies.org</a>.
+      </p>
+
+      <hr class="my-4">
+
+      <h4 style="font-family: 'Cormorant Garamond', serif; color: #6A1B9A;">Changes to This Policy</h4>
+      <p class="text-muted">
+        We may update this Cookie Policy from time to time. Any changes will be posted on this page with an updated revision date.
+      </p>
+
+      <hr class="my-4">
+
+      <p class="text-muted">Have questions? <a href="{% url 'contact' %}" style="color: #6A1B9A;">Contact us</a> and we'll be happy to help.</p>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

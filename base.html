@@ -1,0 +1,681 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Beauty in Black | Premium Afro Hair & Beauty Products UK{% endblock %}</title>
+    <meta name="description" content="Premium Afro hair care, wigs, extensions, skincare and beauty products. Black Is Beauty – celebrating melanin-rich beauty across the UK.">
+
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+
+    {% block extra_head %}{% endblock %}
+</head>
+<body class="theme-dark">
+
+<!-- ══ HEADER ════════════════════════════════════════════════ -->
+<header class="site-header py-3">
+    <div class="container">
+        <div class="row align-items-center">
+
+            <!-- Logo -->
+            <div class="col-md-3 col-12 mb-3 mb-md-0">
+                <a href="{% url 'homepage' %}" class="site-logo-wrap">
+                    <img src="{% static 'images/logo-full.png' %}" alt="Beauty Logo" class="logo-img">
+                    <div class="site-logo-text">
+                        <span class="site-logo-title">Beauty in Black</span>
+                        <span class="site-logo-subtitle">Skin · Hair · Body</span>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Search -->
+            <div class="col-md-5 col-12 mb-3 mb-md-0">
+                <form action="{% url 'homepage' %}" method="get" class="search-form d-flex">
+                    <input type="search" name="q" value="{{ request.GET.q }}"
+                           class="form-control" placeholder="Search products…">
+                    <button type="submit" class="btn btn-search ml-2">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Actions -->
+            <div class="col-md-4 col-12 text-md-right text-left">
+
+                <!-- Theme toggle -->
+                <button id="theme-toggle" class="btn btn-theme-toggle mr-2 mb-2 mb-md-0" type="button">
+                    <i class="fas fa-adjust"></i> Theme
+                </button>
+
+                {% if user.is_authenticated %}
+                    <span class="header-link mr-2" style="font-size:0.78rem;opacity:0.7;">
+                        Hi, {{ user.first_name|default:user.email }}
+                    </span>
+                    <a href="#" class="header-link mr-3" onclick="openPanel('orders-panel');return false;">
+                        <i class="fas fa-box"></i> Orders
+                    </a>
+                    <a href="{% url 'logout' %}" class="header-link mr-3">Logout</a>
+                {% else %}
+                    <a href="{% url 'login' %}"  class="header-link mr-3">Login</a>
+                    <a href="{% url 'signup' %}" class="header-link mr-3">Sign Up</a>
+                {% endif %}
+
+                <!-- Cart icon with count badge -->
+                <a href="#" class="header-link position-relative" onclick="openPanel('cart-panel');return false;">
+                    <i class="fas fa-shopping-bag"></i> Bag
+                    <span id="cart-badge" class="cart-badge" style="display:none;">0</span>
+                </a>
+
+                <!-- Wishlist -->
+                <a href="#" class="header-link ml-3" onclick="openPanel('wishlist-panel');return false;">
+                    <i class="far fa-heart"></i> Wishlist
+                </a>
+            </div>
+
+        </div>
+    </div>
+</header>
+
+<!-- ══ MAIN NAV ═══════════════════════════════════════════════ -->
+<nav class="navbar navbar-expand-lg main-nav">
+    <div class="container">
+        <button class="navbar-toggler" type="button"
+                data-toggle="collapse" data-target="#mainNavbar"
+                aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mainNavbar">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'homepage' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'homepage' %}#products-section">Shop</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'homepage' %}?category_name=accessories#products-section">Accessories</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'homepage' %}?category_name=haircare#products-section">Haircare</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'homepage' %}?category_name=kids#products-section">Kids</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'homepage' %}?category_name=makeup#products-section">Makeup</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'homepage' %}?category_name=mens#products-section">Mens</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'homepage' %}?category_name=skincare#products-section">Skincare</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'homepage' %}?category_name=wigs#products-section">Wigs</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- ══ FLASH MESSAGES ════════════════════════════════════════ -->
+{% if messages %}
+<div class="container mt-2">
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<!-- ══ PAGE CONTENT ══════════════════════════════════════════ -->
+<main class="site-main py-4">
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+</main>
+
+<!-- ══ SIDE PANELS (Cart / Wishlist / Orders / Product Detail) ═ -->
+
+<!-- Overlay backdrop -->
+<div id="panel-backdrop" onclick="closeAllPanels()"
+     style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:1040;"></div>
+
+<!-- CART PANEL -->
+<div id="cart-panel" class="side-panel" style="right:-480px;">
+    <div class="panel-header">
+        <h5 class="panel-title"><i class="fas fa-shopping-bag mr-2"></i>Your Bag</h5>
+        <button class="panel-close" onclick="closeAllPanels()"><i class="fas fa-times"></i></button>
+    </div>
+    <div id="cart-panel-body" class="panel-body">
+        <p class="text-muted text-center py-4">Loading…</p>
+    </div>
+    <div class="panel-footer">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <strong>Total:</strong>
+            <strong id="cart-total-display">£0.00</strong>
+        </div>
+        <button class="btn-panel-primary w-100" onclick="openCheckout()">
+            Proceed to Checkout
+        </button>
+    </div>
+</div>
+
+<!-- WISHLIST PANEL -->
+<div id="wishlist-panel" class="side-panel" style="right:-480px;">
+    <div class="panel-header">
+        <h5 class="panel-title"><i class="far fa-heart mr-2"></i>Wishlist</h5>
+        <button class="panel-close" onclick="closeAllPanels()"><i class="fas fa-times"></i></button>
+    </div>
+    <div id="wishlist-panel-body" class="panel-body">
+        <p class="text-muted text-center py-4">Your wishlist is empty.</p>
+    </div>
+    <div class="panel-footer">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <strong>Total:</strong>
+            <strong id="cart-total-display">£0.00</strong>
+        </div>
+        <button class="btn-panel-primary w-100" onclick="openCheckout()">
+            Proceed to Checkout
+        </button>
+    </div>
+</div>
+
+<!-- ORDERS PANEL -->
+<div id="orders-panel" class="side-panel" style="right:-480px;">
+    <div class="panel-header">
+        <h5 class="panel-title"><i class="fas fa-box mr-2"></i>My Orders</h5>
+        <button class="panel-close" onclick="closeAllPanels()"><i class="fas fa-times"></i></button>
+    </div>
+    <div id="orders-panel-body" class="panel-body">
+        <p class="text-muted text-center py-4">Loading…</p>
+    </div>
+</div>
+
+<!-- PRODUCT DETAIL PANEL -->
+<div id="product-detail-panel" class="side-panel side-panel-wide" style="right:-700px;">
+    <div class="panel-header">
+        <h5 class="panel-title">Product Details</h5>
+        <button class="panel-close" onclick="closeAllPanels()"><i class="fas fa-times"></i></button>
+    </div>
+    <div id="product-detail-body" class="panel-body">
+        <p class="text-muted text-center py-4">Loading…</p>
+    </div>
+</div>
+
+<!-- CHECKOUT PANEL -->
+<div id="checkout-panel" class="side-panel" style="right:-480px;">
+    <div class="panel-header">
+        <h5 class="panel-title"><i class="fas fa-credit-card mr-2"></i>Checkout</h5>
+        <button class="panel-close" onclick="closeAllPanels()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="panel-body">
+        <p class="panel-section-label">Delivery Details</p>
+        <div class="form-group">
+            <label class="panel-label">Delivery Address</label>
+            <textarea id="checkout-address" class="form-control" rows="3"
+                      placeholder="Your full delivery address…"></textarea>
+        </div>
+        <div class="form-group">
+            <label class="panel-label">Phone Number</label>
+            <input type="tel" id="checkout-phone" class="form-control"
+                   placeholder="Your phone number…">
+        </div>
+        <p class="panel-section-label mt-3">Order Summary</p>
+        <div id="checkout-summary"></div>
+    </div>
+    <div class="panel-footer">
+        <div class="d-flex justify-content-between mb-3">
+            <strong>Total:</strong>
+            <strong id="checkout-total-display">£0.00</strong>
+        </div>
+        <button class="btn-panel-primary w-100" onclick="submitCheckout()">
+            <i class="fab fa-stripe-s mr-2"></i>Pay with Stripe
+        </button>
+        <p style="font-size:0.7rem;text-align:center;opacity:0.6;margin-top:8px;">
+            <i class="fas fa-lock mr-1"></i>Secure payment via Stripe
+        </p>
+    </div>
+</div>
+
+<!-- TOAST NOTIFICATION -->
+<div id="bib-toast"
+     style="display:none;position:fixed;bottom:24px;right:24px;z-index:9999;
+            background:#2C1810;color:#E8D5B0;padding:14px 22px;
+            border-left:3px solid #C9A96E;font-family:'Jost',sans-serif;
+            font-size:0.88rem;box-shadow:0 4px 20px rgba(0,0,0,0.35);
+            display:none;align-items:center;gap:10px;min-width:260px;">
+    <i id="bib-toast-icon" class="fas fa-check-circle" style="color:#C9A96E;font-size:1.1rem;"></i>
+    <span id="bib-toast-msg">Done!</span>
+</div>
+
+<!-- ══ FOOTER ════════════════════════════════════════════════ -->
+<footer style="background:#0D0906;color:#E8D5B0;border-top:2px solid #C9A96E;margin-top:60px;">
+    <div style="padding:52px 0 32px;">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-4 col-lg-3 mb-4">
+                    <div>
+                        <!-- CHANGED: logo-icon.png → logo-full.png to match header -->
+                        <img src="{% static 'images/logo-full.png' %}" alt="Beauty In Black Logo" class="logo-img">
+                        <span style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;color:#C9A96E;display:block;margin-bottom:4px;">Beauty in Black</span>
+                        <span style="font-family:'Jost',sans-serif;font-size:0.72rem;font-weight:300;letter-spacing:0.1em;color:rgba(232,213,176,0.65);display:block;margin-bottom:16px;">Premium Afro Hair &amp; Beauty · UK</span>
+                        <p style="font-size:0.8rem;color:rgba(232,213,176,0.7);line-height:1.75;margin-bottom:20px;">Celebrating the beauty of melanin-rich hair and skin. We source the finest Afro care products so your crown always shines.</p>
+                        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                            <a href="https://www.facebook.com/BlackIsBeautyUK/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border:1px solid rgba(201,169,110,0.35);color:#E8D5B0;font-size:0.88rem;transition:all 0.2s;text-decoration:none;" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://www.instagram.com/blackisbeautyuk/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border:1px solid rgba(201,169,110,0.35);color:#E8D5B0;font-size:0.88rem;transition:all 0.2s;text-decoration:none;" title="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="https://www.youtube.com/@blackisbeautyuk" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border:1px solid rgba(201,169,110,0.35);color:#E8D5B0;font-size:0.88rem;transition:all 0.2s;text-decoration:none;" title="YouTube"><i class="fab fa-youtube"></i></a>
+                            <a href="#" style="display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border:1px solid rgba(201,169,110,0.35);color:#E8D5B0;font-size:0.88rem;transition:all 0.2s;text-decoration:none;" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-2 col-lg-2 mb-4 bib-footer-col">
+                    <h5 style="font-family:'Cormorant Garamond',serif;font-size:0.95rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#C9A96E;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid rgba(201,169,110,0.22);">Customer Service</h5>
+                    <ul class="bib-footer-links" style="list-style:none;padding:0;margin:0;">
+                        <li style="margin-bottom:9px;"><a href="{% url 'contact' %}" style="color:rgba(232,213,176,0.75);font-size:0.8rem;">Contact Us</a></li>
+                        <li style="margin-bottom:9px;"><a href="{% url 'faqs' %}" style="color:rgba(232,213,176,0.75);font-size:0.8rem;">FAQs</a></li>
+                        <li style="margin-bottom:9px;"><a href="{% url 'orders' %}" style="color:rgba(232,213,176,0.75);font-size:0.8rem;">Track My Order</a></li>
+                        <li style="margin-bottom:9px;"><a href="{% url 'returns_policy' %}" style="color:rgba(232,213,176,0.75);font-size:0.8rem;">Returns Policy</a></li>
+                        <li style="margin-bottom:9px;"><a href="{% url 'cookie_policy' %}" style="color:rgba(232,213,176,0.75);font-size:0.8rem;">Cookie Policy</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-6 col-md-2 col-lg-2 mb-4 bib-footer-col">
+                    <h5 style="font-family:'Cormorant Garamond',serif;font-size:0.95rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#C9A96E;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid rgba(201,169,110,0.22);">My Account</h5>
+                    <ul class="bib-footer-links" style="list-style:none;padding:0;margin:0;">
+                        {% if user.is_authenticated %}
+                        <li style="margin-bottom:9px;"><a href="{% url 'orders' %}" style="color:rgba(232,213,176,0.75);font-size:0.8rem;">My Orders</a></li>
+                        <li style="margin-bottom:9px;"><a href="#" onclick="openPanel('cart-panel');return false;" style="color:rgba(232,213,176,0.75);font-size:0.8rem;">View Bag</a></li>
+                        <li style="margin-bottom:9px;"><a href="#" onclick="openPanel('wishlist-panel');return false;" style="color:rgba(232,213,176,0.75);font-size:0.8rem;">My Wishlist</a></li>
+                        {% else %}
+                        <li style="margin-bottom:9px;"><a href="{% url 'login' %}" style="color:rgba(232,213,176,0.75);font-size:0.8rem;">Sign In</a></li>
+                        <li style="margin-bottom:9px;"><a href="{% url 'signup' %}" style="color:rgba(232,213,176,0.75);font-size:0.8rem;">Create Account</a></li>
+                        <li style="margin-bottom:9px;"><a href="{% url 'cart' %}" style="color:rgba(232,213,176,0.75);font-size:0.8rem;">View Bag</a></li>
+                        <li style="margin-bottom:9px;"><a href="{% url 'orders' %}" style="color:rgba(232,213,176,0.75);font-size:0.8rem;">Order Status</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+
+                <div class="col-6 col-md-2 col-lg-2 mb-4 bib-footer-col">
+                    <h5 style="font-family:'Cormorant Garamond',serif;font-size:0.95rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#C9A96E;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid rgba(201,169,110,0.22);">Information</h5>
+                    <ul class="bib-footer-links" style="list-style:none;padding:0;margin:0;">
+                        <li style="margin-bottom:9px;"><a href="{% url 'about_us' %}" style="color:rgba(232,213,176,0.75);font-size:0.8rem;">About Us</a></li>
+                        <li style="margin-bottom:9px;"><a href="{% url 'sitemap' %}" style="color:rgba(232,213,176,0.75);font-size:0.8rem;">Sitemap</a></li>
+                        <li style="margin-bottom:9px;"><a href="{% url 'terms' %}" style="color:rgba(232,213,176,0.75);font-size:0.8rem;">Terms &amp; Conditions</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-6 col-md col-lg-3 mb-4 bib-footer-col">
+                    <h5 style="font-family:'Cormorant Garamond',serif;font-size:0.95rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#C9A96E;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid rgba(201,169,110,0.22);">Newsletter</h5>
+                    <p style="font-size:0.8rem;color:rgba(232,213,176,0.65);line-height:1.7;margin-bottom:14px;">Be first to hear about new arrivals, exclusive offers &amp; beauty tips.</p>
+                    <form class="js-newsletter-form" onsubmit="return false;">
+                        <div style="display:flex;">
+                            <input type="email" class="form-control" placeholder="Your email address…" required
+                                   style="background:rgba(255,255,255,0.07);border:1px solid rgba(201,169,110,0.35);border-right:none;border-radius:0;color:#E8D5B0;font-size:0.8rem;height:40px;padding:0 14px;">
+                            <button type="submit"
+                                    style="background:#C9A96E;color:#2C1810;border:none;height:40px;padding:0 16px;font-family:'Jost',sans-serif;font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;">Go</button>
+                        </div>
+                    </form>
+                    <div style="margin-top:16px;">
+                        <p style="font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(232,213,176,0.4);margin-bottom:8px;">Secure Payments</p>
+                        <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;">
+                            <img src="https://img.shields.io/badge/VISA-1A1F71?style=flat&logo=visa&logoColor=white" alt="Visa" style="height:20px;">
+                            <img src="https://img.shields.io/badge/Mastercard-EB001B?style=flat&logo=mastercard&logoColor=white" alt="Mastercard" style="height:20px;">
+                            <img src="https://img.shields.io/badge/Stripe-635BFF?style=flat&logo=stripe&logoColor=white" alt="Stripe" style="height:20px;">
+                            <img src="https://img.shields.io/badge/PayPal-003087?style=flat&logo=paypal&logoColor=white" alt="PayPal" style="height:20px;">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div style="border-top:1px solid rgba(201,169,110,0.18);padding:16px 0;font-family:'Jost',sans-serif;font-size:0.72rem;letter-spacing:0.05em;color:rgba(232,213,176,0.45);">
+        <div class="container">
+            <div class="d-flex flex-wrap justify-content-between align-items-center" style="gap:8px;">
+                <span>&copy; 2026 Beauty in Black. All rights reserved. | Ealing, London, UK</span>
+                <div>
+                    <a href="{% url 'terms' %}" style="color:rgba(232,213,176,0.45);margin-left:18px;">Terms &amp; Conditions</a>
+                    <a href="{% url 'cookie_policy' %}" style="color:rgba(232,213,176,0.45);margin-left:18px;">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- ══ SCRIPTS ════════════════════════════════════════════════ -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+/* ─── THEME (dark / light) ─────────────────────────────────── */
+(function () {
+    var body   = document.body;
+    var toggle = document.getElementById('theme-toggle');
+
+    function applyTheme(name) {
+        body.classList.remove('theme-dark', 'theme-light');
+        body.classList.add(name);
+        localStorage.setItem('bib-theme', name);
+        if (toggle) {
+            toggle.innerHTML = name === 'theme-dark'
+                ? '<i class="fas fa-sun"></i> Light'
+                : '<i class="fas fa-moon"></i> Dark';
+        }
+    }
+
+    var saved = localStorage.getItem('bib-theme');
+    applyTheme(saved === 'theme-light' ? 'theme-light' : 'theme-dark');
+
+    if (toggle) {
+        toggle.addEventListener('click', function () {
+            applyTheme(body.classList.contains('theme-dark') ? 'theme-light' : 'theme-dark');
+        });
+    }
+})();
+
+/* ─── CSRF helper ───────────────────────────────────────────── */
+function getCookie(name) {
+    var m = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+    return m ? decodeURIComponent(m[2]) : '';
+}
+
+function apiFetch(url, data) {
+    return fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-CSRFToken': getCookie('csrftoken') },
+        body: JSON.stringify(data)
+    }).then(function(r){ return r.json(); });
+}
+
+/* ─── TOAST ────────────────────────────────────────────────── */
+function showToast(msg, ok) {
+    var t = document.getElementById('bib-toast');
+    var i = document.getElementById('bib-toast-icon');
+    document.getElementById('bib-toast-msg').textContent = msg;
+    if (i) i.className = ok === false
+        ? 'fas fa-exclamation-circle'
+        : 'fas fa-check-circle';
+    t.style.display = 'flex';
+    setTimeout(function(){ t.style.display = 'none'; }, 3000);
+}
+
+/* ─── SIDE PANEL helpers ───────────────────────────────────── */
+function openPanel(id) {
+    closeAllPanels();
+    var p = document.getElementById(id);
+    var b = document.getElementById('panel-backdrop');
+    if (!p) return;
+    p.style.right = '0';
+    if (b) b.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    if (id === 'cart-panel')     loadCartPanel();
+    if (id === 'orders-panel')   loadOrdersPanel();
+}
+
+function closeAllPanels() {
+    document.querySelectorAll('.side-panel').forEach(function(p){
+        p.style.right = p.classList.contains('side-panel-wide') ? '-700px' : '-480px';
+    });
+    var b = document.getElementById('panel-backdrop');
+    if (b) b.style.display = 'none';
+    document.body.style.overflow = '';
+}
+
+/* ─── CART ─────────────────────────────────────────────────── */
+function loadCartPanel() {
+    fetch('/ajax-cart-data/')
+        .then(function(r){ return r.json(); })
+        .then(function(data){
+            updateCartBadge(data.count);
+            var body  = document.getElementById('cart-panel-body');
+            var total = document.getElementById('cart-total-display');
+            if (total) total.textContent = '£' + parseFloat(data.total).toFixed(2);
+            var ct    = document.getElementById('checkout-total-display');
+            if (ct)    ct.textContent = '£' + parseFloat(data.total).toFixed(2);
+            if (!data.items.length) {
+                body.innerHTML = '<p class="text-muted text-center py-5">Your bag is empty.</p>';
+                return;
+            }
+            var html = '<div class="cart-item-list">';
+            data.items.forEach(function(item){
+                html += '<div class="cart-item" id="ci-' + item.product_id + '">'
+                    + '<div class="cart-item-info">'
+                    + (item.image ? '<img src="' + item.image + '" alt="' + item.name + '" class="cart-item-img">' : '<div class="cart-item-img-placeholder"><i class="fas fa-image"></i></div>')
+                    + '<div>'
+                    + '<p class="cart-item-name">' + item.name + '</p>'
+                    + '<p class="cart-item-meta">Qty ' + item.quantity + ' · £' + parseFloat(item.subtotal).toFixed(2) + '</p>'
+                    + '</div></div>'
+                    + '<button class="cart-item-remove" onclick="removeFromCart(' + item.product_id + ')" title="Remove">'
+                    + '<i class="fas fa-times"></i></button>'
+                    + '</div>';
+            });
+            html += '</div>';
+            body.innerHTML = html;
+        });
+}
+
+function updateCartBadge(count) {
+    var badge = document.getElementById('cart-badge');
+    if (!badge) return;
+    if (count > 0) {
+        badge.textContent = count;
+        badge.style.display = 'inline-flex';
+    } else {
+        badge.style.display = 'none';
+    }
+}
+
+function addToCart(productId, btn) {
+    apiFetch('/ajax-add-to-cart/', { product_id: productId, quantity: 1 })
+        .then(function(data){
+            if (data.error === 'login_required') {
+                window.location.href = '/login/';
+                return;
+            }
+            if (data.success) {
+                updateCartBadge(data.cart_count);
+                showToast('Added to bag!');
+                if (btn) {
+                    btn.textContent = 'Remove';
+                    btn.classList.remove('btn-add-state');
+                    btn.classList.add('btn-remove-state');
+                    btn.setAttribute('onclick', 'removeFromCartBtn(' + productId + ', this)');
+                }
+            }
+        });
+}
+
+function removeFromCartBtn(productId, btn) {
+    apiFetch('/ajax-remove-from-cart/', { product_id: productId })
+        .then(function(data){
+            if (data.success) {
+                updateCartBadge(data.cart_count);
+                showToast('Removed from bag.');
+                if (btn) {
+                    btn.textContent = 'Add to Bag';
+                    btn.classList.remove('btn-remove-state');
+                    btn.classList.add('btn-add-state');
+                    btn.setAttribute('onclick', 'addToCart(' + productId + ', this)');
+                }
+            }
+        });
+}
+
+function removeFromCart(productId) {
+    apiFetch('/ajax-remove-from-cart/', { product_id: productId })
+        .then(function(data){
+            if (data.success) {
+                updateCartBadge(data.cart_count);
+                var el = document.getElementById('ci-' + productId);
+                if (el) el.remove();
+                var tot = document.getElementById('cart-total-display');
+                if (tot) tot.textContent = '£' + parseFloat(data.cart_total).toFixed(2);
+                showToast('Removed from bag.');
+            }
+        });
+}
+
+/* ─── WISHLIST ─────────────────────────────────────────────── */
+function toggleWishlist(productId, btn) {
+    var inWishlist = btn.classList.contains('wishlist-active');
+    var url = inWishlist ? '/ajax-remove-from-wishlist/' : '/ajax-add-to-wishlist/';
+    apiFetch(url, { product_id: productId })
+        .then(function(data){
+            if (data.error === 'login_required') { window.location.href='/login/'; return; }
+            if (data.success) {
+                btn.classList.toggle('wishlist-active');
+                var icon = btn.querySelector('i');
+                if (icon) {
+                    icon.classList.toggle('far');
+                    icon.classList.toggle('fas');
+                }
+                showToast(inWishlist ? 'Removed from wishlist.' : 'Added to wishlist!');
+            }
+        });
+}
+
+/* ─── ORDERS PANEL ─────────────────────────────────────────── */
+function loadOrdersPanel() {
+    fetch('/ajax-orders/')
+        .then(function(r){ return r.json(); })
+        .then(function(data){
+            var body = document.getElementById('orders-panel-body');
+            if (!data.orders.length) {
+                body.innerHTML = '<p class="text-muted text-center py-5">No orders yet.</p>';
+                return;
+            }
+            var html = '';
+            data.orders.forEach(function(o){
+                html += '<div class="order-item">'
+                    + '<div class="d-flex justify-content-between align-items-start">'
+                    + '<div>'
+                    + '<p class="order-product">' + o.product + '</p>'
+                    + '<p class="order-meta">Qty ' + o.quantity + ' · £' + parseFloat(o.total).toFixed(2) + '</p>'
+                    + '<p class="order-meta">' + o.created_at + '</p>'
+                    + '</div>'
+                    + '<span class="order-badge ' + (o.paid ? 'order-paid' : 'order-pending') + '">'
+                    + (o.paid ? 'Paid' : 'Pending') + '</span>'
+                    + '</div>'
+                    + '</div>';
+            });
+            body.innerHTML = html;
+        });
+}
+
+/* ─── PRODUCT DETAIL PANEL ──────────────────────────────────── */
+function openProductDetail(productId, name, price, imageUrl, description, categoryName, inCart, inWishlist) {
+    openPanel('product-detail-panel');
+    var body = document.getElementById('product-detail-body');
+
+    var starsHtml = '';
+    for (var i = 1; i <= 5; i++) {
+        starsHtml += '<i class="' + (i <= 4 ? 'fas' : 'far') + ' fa-star" style="color:#C9A96E;font-size:0.9rem;"></i>';
+    }
+
+    var addBtnClass   = inCart ? 'btn-remove-state' : 'btn-add-state';
+    var addBtnText    = inCart ? 'Remove' : 'Add to Bag';
+    var addBtnOnclick = inCart
+        ? 'removeFromCartBtn(' + productId + ', this)'
+        : 'addToCart(' + productId + ', this)';
+
+    var wishBtnClass  = inWishlist ? 'wishlist-btn wishlist-active' : 'wishlist-btn';
+    var wishIconClass = inWishlist ? 'fas fa-heart' : 'far fa-heart';
+
+    body.innerHTML = ''
+        + '<div class="prd-detail-img-wrap">'
+        + (imageUrl
+            ? '<img src="' + imageUrl + '" alt="' + name + '" class="prd-detail-img">'
+            : '<div class="prd-detail-img-placeholder"><i class="fas fa-image"></i></div>')
+        + '</div>'
+        + '<div class="prd-detail-info">'
+        + '<p class="prd-detail-category">' + (categoryName || '') + '</p>'
+        + '<h3 class="prd-detail-name">' + name + '</h3>'
+        + '<div class="prd-detail-stars mb-2">' + starsHtml + ' <span style="font-size:0.78rem;opacity:0.6;margin-left:4px;">(4.0)</span></div>'
+        + '<p class="prd-detail-price">£' + parseFloat(price).toFixed(2) + '</p>'
+        + '<p class="prd-detail-desc">' + (description || 'No description available.') + '</p>'
+        + '<div class="prd-detail-actions">'
+        + '<button class="prd-detail-add-btn ' + addBtnClass + '" onclick="' + addBtnOnclick + '">' + addBtnText + '</button>'
+        + '<button class="' + wishBtnClass + '" onclick="toggleWishlist(' + productId + ', this)" title="Wishlist">'
+        + '<i class="' + wishIconClass + '"></i>'
+        + '</button>'
+        + '</div>'
+        + '</div>';
+}
+
+/* ─── CHECKOUT ─────────────────────────────────────────────── */
+function openCheckout() {
+    closeAllPanels();
+    fetch('/ajax-cart-data/')
+        .then(function(r){ return r.json(); })
+        .then(function(data){
+            var summary = document.getElementById('checkout-summary');
+            var total   = document.getElementById('checkout-total-display');
+            if (total) total.textContent = '£' + parseFloat(data.total).toFixed(2);
+            if (summary) {
+                var html = '';
+                data.items.forEach(function(item){
+                    html += '<div class="checkout-summary-item">'
+                        + '<span>' + item.name + ' x' + item.quantity + '</span>'
+                        + '<span>£' + parseFloat(item.subtotal).toFixed(2) + '</span>'
+                        + '</div>';
+                });
+                summary.innerHTML = html || '<p class="text-muted">Cart is empty.</p>';
+            }
+            openPanel('checkout-panel');
+        });
+}
+
+function submitCheckout() {
+    var address = document.getElementById('checkout-address').value.trim();
+    var phone   = document.getElementById('checkout-phone').value.trim();
+
+    if (!address || !phone) {
+        showToast('Please fill in your address and phone number.', false);
+        return;
+    }
+
+    fetch('/create-checkout-session/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-CSRFToken': getCookie('csrftoken') },
+        body: JSON.stringify({ address: address, phone: phone })
+    })
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+        if (data.url) {
+            window.location.href = data.url;
+        } else {
+            showToast(data.error || 'Something went wrong.', false);
+        }
+    });
+}
+
+/* ─── NEWSLETTER ─────────────────────────────────────────────── */
+document.querySelectorAll('.js-newsletter-form').forEach(function(form){
+    form.addEventListener('submit', function(e){
+        e.preventDefault();
+        var input = form.querySelector('input[type="email"]');
+        if (input && input.value) {
+            input.value = '';
+            input.placeholder = '✓ Thank you for subscribing!';
+            setTimeout(function(){ input.placeholder = 'Your email…'; }, 3000);
+        }
+    });
+});
+</script>
+
+{% block scripts %}{% endblock %}
+</body>
+</html>

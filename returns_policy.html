@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Returns Policy | Beauty In Black{% endblock %}
+
+{% block content %}
+<div style="background: linear-gradient(135deg, #2C1810 0%, #6B3F2A 60%, #C9A96E 100%); padding: 50px 0 35px;">
+  <div class="container text-center text-light">
+    <h1 style="font-family: 'Cormorant Garamond', serif; font-size: 3rem;">Returns Policy</h1>
+    <p class="mb-0" style="color: #f0d9c0;">Last updated: April 2026</p>
+  </div>
+</div>
+
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-9">
+
+      <!-- Quick summary cards -->
+      <div class="row text-center mb-5">
+        <div class="col-md-4 mb-3">
+          <div class="card border-0 shadow-sm p-4 h-100">
+            <div style="font-size: 2rem; color: #6A1B9A;" class="mb-2"><i class="fas fa-calendar-check"></i></div>
+            <h6 style="font-family: 'Cormorant Garamond', serif;">30-Day Returns</h6>
+            <p class="text-muted small mb-0">Return most items within 30 days of delivery.</p>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <div class="card border-0 shadow-sm p-4 h-100">
+            <div style="font-size: 2rem; color: #6A1B9A;" class="mb-2"><i class="fas fa-box-open"></i></div>
+            <h6 style="font-family: 'Cormorant Garamond', serif;">Unopened Items Only</h6>
+            <p class="text-muted small mb-0">Items must be unused and in original packaging.</p>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <div class="card border-0 shadow-sm p-4 h-100">
+            <div style="font-size: 2rem; color: #6A1B9A;" class="mb-2"><i class="fas fa-pound-sign"></i></div>
+            <h6 style="font-family: 'Cormorant Garamond', serif;">Full Refund</h6>
+            <p class="text-muted small mb-0">Refunds processed within 5–10 business days.</p>
+          </div>
+        </div>
+      </div>
+
+      <h4 style="font-family: 'Cormorant Garamond', serif; color: #6A1B9A;">Eligibility for Returns</h4>
+      <p class="text-muted">To be eligible for a return, items must be:</p>
+      <ul class="text-muted">
+        <li>Returned within 30 days of the delivery date</li>
+        <li>Unopened, unused, and in their original packaging</li>
+        <li>Accompanied by proof of purchase (order number or receipt)</li>
+      </ul>
+
+      <hr class="my-4">
+
+      <h4 style="font-family: 'Cormorant Garamond', serif; color: #6A1B9A;">Non-Returnable Items</h4>
+      <p class="text-muted">For hygiene reasons, the following items cannot be returned once opened:</p>
+      <ul class="text-muted">
+        <li>Hair extensions, wigs, and hairpieces</li>
+        <li>Skincare products (creams, serums, oils)</li>
+        <li>Makeup and cosmetics</li>
+        <li>Any item marked as "Final Sale"</li>
+      </ul>
+
+      <hr class="my-4">
+
+      <h4 style="font-family: 'Cormorant Garamond', serif; color: #6A1B9A;">How to Return an Item</h4>
+      <ol class="text-muted">
+        <li class="mb-2">Contact us at <a href="{% url 'contact' %}" style="color: #6A1B9A;">our contact page</a> with your order number and reason for return.</li>
+        <li class="mb-2">We'll send you a Return Authorisation (RA) number within 2 business days.</li>
+        <li class="mb-2">Pack your item securely and include your RA number on the package.</li>
+        <li class="mb-2">Ship the item to the return address provided. Return postage is at the customer's expense unless the item is faulty.</li>
+      </ol>
+
+      <hr class="my-4">
+
+      <h4 style="font-family: 'Cormorant Garamond', serif; color: #6A1B9A;">Faulty or Incorrect Items</h4>
+      <p class="text-muted">
+        If you received a faulty, damaged, or incorrect item, please contact us within <strong>48 hours</strong> of delivery with photos. We will arrange a free return and send a replacement or issue a full refund at no cost to you.
+      </p>
+
+      <hr class="my-4">
+
+      <h4 style="font-family: 'Cormorant Garamond', serif; color: #6A1B9A;">Refunds</h4>
+      <p class="text-muted">
+        Once we receive and inspect your return, we will notify you by email. If approved, your refund will be processed to your original payment method within <strong>5–10 business days</strong>.
+      </p>
+
+      <hr class="my-4">
+
+      <p class="text-muted">Questions? <a href="{% url 'contact' %}" style="color: #6A1B9A;">Get in touch with our team</a> — we're happy to help.</p>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,768 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Beauty in Black | Premium Afro Hair & Beauty Products UK{% endblock %}
+
+{% block content %}
+
+<!-- ══ PAYMENT SUCCESS BANNER ═════════════════════════════════ -->
+{% if payment_success %}
+<div style="background:linear-gradient(135deg,#2A4A28,#4A7A48);padding:40px;text-align:center;margin-bottom:40px;border:1px solid #5A9A58;">
+    <i class="fas fa-check-circle" style="font-size:2.5rem;color:#90C090;margin-bottom:12px;display:block;"></i>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:#fff;margin-bottom:8px;">Order Confirmed!</h2>
+    <p style="color:rgba(255,255,255,0.8);font-size:0.9rem;margin-bottom:20px;">
+        Thank you for shopping with Black Is Beauty. A confirmation email is on its way to you.
+    </p>
+    <a href="{% url 'homepage' %}" style="display:inline-block;background:#C9A96E;color:#2C1810;font-family:'Jost',sans-serif;font-size:0.78rem;letter-spacing:0.14em;text-transform:uppercase;padding:12px 32px;">
+        Continue Shopping
+    </a>
+</div>
+{% endif %}
+
+<!-- ══ HERO CAROUSEL ══════════════════════════════════════════ -->
+<section class="hero-slider" style="margin: -24px -15px 0; width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw;">
+    <div id="heroCarousel" class="carousel slide" data-ride="carousel" data-interval="5000">
+        <div class="carousel-inner">
+
+            <!-- Slide 1 -->
+            <div class="carousel-item active">
+                <div class="hero-slide">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-md-6 hero-content" style="padding:80px 0;">
+                                <span class="hero-eyebrow">New Season Collection</span>
+                                <h1 class="hero-title">Your Crown,<br><em>Your Story</em></h1>
+                                <p class="hero-subtitle">Premium Afro hair care, wigs, skincare and beauty products crafted for melanin-rich beauty.</p>
+                                <a href="#products-section" class="btn-hero-primary">Shop Now</a>
+                            </div>
+                            <div class="col-md-6 text-center d-none d-md-block">
+                                <img src="{% static 'images/logo-full.png' %}" alt="Beauty In Black"
+                                     style="max-height:280px;filter:drop-shadow(0 20px 40px rgba(0,0,0,0.4));">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="carousel-item">
+                <div class="hero-slide" style="background:linear-gradient(135deg,#3B2A1A 0%,#8B6040 50%,#C9A96E 100%);">
+                    <div class="container">
+                        <div class="col-md-7 hero-content" style="padding:80px 0;">
+                            <span class="hero-eyebrow">Top Brands</span>
+                            <h1 class="hero-title">Discover<br><em>Your Brands</em></h1>
+                            <p class="hero-subtitle">Shea Moisture, Cantu, Mielle &amp; more — all in one place.</p>
+                            <a href="#brands" class="btn-hero-primary">View All Brands</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <a class="carousel-control-prev" href="#heroCarousel" role="button" data-slide="prev" style="width:50px;opacity:0.6;">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </a>
+        <a class="carousel-control-next" href="#heroCarousel" role="button" data-slide="next" style="width:50px;opacity:0.6;">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        </a>
+        <ol class="carousel-indicators" style="bottom:16px;">
+            <li data-target="#heroCarousel" data-slide-to="0" class="active" style="background:var(--gold);"></li>
+            <li data-target="#heroCarousel" data-slide-to="1" style="background:rgba(201,169,110,0.4);"></li>
+            <li data-target="#heroCarousel" data-slide-to="2" style="background:rgba(201,169,110,0.4);"></li>
+        </ol>
+    </div>
+</section>
+
+<!-- ══ PROMO STRIP ════════════════════════════════════════════ -->
+<div style="background:var(--gold);width:100vw;position:relative;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;">
+    <div class="container">
+        <div style="display:flex;justify-content:space-around;align-items:stretch;flex-wrap:wrap;">
+            <div style="flex:1;text-align:center;padding:13px 16px;border-right:1px solid rgba(44,24,16,0.15);font-family:'Jost',sans-serif;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--brown-dark);display:flex;align-items:center;justify-content:center;gap:7px;min-width:150px;">
+                <i class="fas fa-shipping-fast"></i> Free UK Delivery Over £40
+            </div>
+            <div style="flex:1;text-align:center;padding:13px 16px;border-right:1px solid rgba(44,24,16,0.15);font-family:'Jost',sans-serif;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--brown-dark);display:flex;align-items:center;justify-content:center;gap:7px;min-width:150px;">
+                <i class="fas fa-undo"></i> 30-Day Returns
+            </div>
+            <div style="flex:1;text-align:center;padding:13px 16px;border-right:1px solid rgba(44,24,16,0.15);font-family:'Jost',sans-serif;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--brown-dark);display:flex;align-items:center;justify-content:center;gap:7px;min-width:150px;">
+                <i class="fas fa-lock"></i> Secure Stripe Payments
+            </div>
+            <div style="flex:1;text-align:center;padding:13px 16px;font-family:'Jost',sans-serif;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--brown-dark);display:flex;align-items:center;justify-content:center;gap:7px;min-width:150px;">
+                <i class="fas fa-headset"></i> Expert Beauty Advice
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ══ PRODUCTS SECTION ═══════════════════════════════════════ -->
+<section id="products-section" class="section-products">
+    <div class="section-header">
+        <span class="eyebrow">Shop</span>
+        <h2>
+            {% if selected_gender == 'female' %}Female Products
+            {% elif selected_gender == 'male' %}Male Products
+            {% elif selected_category %}Filtered Products
+            {% elif category_name %}{{ category_name|title }}
+            {% elif q %}Results for "{{ q }}"
+            {% else %}All Products{% endif %}
+        </h2>
+        <span class="divider"></span>
+        <p>Click a product to view full details, add to bag, or save to your wishlist.</p>
+    </div>
+
+    <!-- Category filter tabs -->
+    <div class="tabs-nav-wrap">
+        <ul class="tabs-nav">
+            <li class="nav-item">
+                <a class="nav-link {% if not selected_category and not category_name %}active{% endif %}" href="{% url 'homepage' %}#products-section">All</a>
+            </li>
+            {% for cat in categories %}
+            <li class="nav-item">
+                <a class="nav-link {% if selected_category == cat.id|stringformat:'s' %}active{% endif %}"
+                   href="{% url 'homepage' %}?category={{ cat.id }}#products-section">
+                    {{ cat.name }}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- ══ PRODUCT GRID + SIDEBAR FILTERS ═══════════════════════ -->
+    <div class="row" style="margin-top:20px;">
+
+        <!-- Product grid (left/main column) -->
+        <div class="col-lg-9 col-md-8">
+            <div class="row">
+                {% for product in products %}
+                {% with in_cart=product.id|stringformat:"s" in_wishlist=product.id|stringformat:"s" %}
+                <div class="col-6 col-md-4 mb-4">
+                    <div class="prd-card">
+
+                        <!-- Product image — click to open detail panel -->
+                        <a href="#" class="prd-card-link"
+                           onclick="openProductDetail(
+                               {{ product.id }},
+                               '{{ product.name|escapejs }}',
+                               '{{ product.price }}',
+                               '{% if product.image %}{{ product.image.url }}{% endif %}',
+                               '{{ product.description|default:''|escapejs|truncatechars:300 }}',
+                               '{{ product.category.name|escapejs }}',
+                               {% if product.id in cart_product_ids %}true{% else %}false{% endif %},
+                               {% if product.id in wishlist_product_ids %}true{% else %}false{% endif %}
+                           );return false;">
+                            <div class="prd-img-wrap">
+                                {% if product.image %}
+                                    <img src="{{ product.image.url }}" alt="{{ product.name }}" loading="lazy">
+                                {% else %}
+                                    <div class="prd-placeholder">{{ product.name|truncatechars:30 }}</div>
+                                {% endif %}
+                            </div>
+                        </a>
+
+                        <div class="prd-body">
+                            <p class="prd-category">{{ product.category.name }}</p>
+
+                            <a href="#" class="prd-card-link"
+                               onclick="openProductDetail(
+                                   {{ product.id }},
+                                   '{{ product.name|escapejs }}',
+                                   '{{ product.price }}',
+                                   '{% if product.image %}{{ product.image.url }}{% endif %}',
+                                   '{{ product.description|default:''|escapejs|truncatechars:300 }}',
+                                   '{{ product.category.name|escapejs }}',
+                                   {% if product.id in cart_product_ids %}true{% else %}false{% endif %},
+                                   {% if product.id in wishlist_product_ids %}true{% else %}false{% endif %}
+                               );return false;">
+                                <h3 class="prd-name">{{ product.name|truncatechars:45 }}</h3>
+                            </a>
+
+                            <div class="prd-price">
+                                £{{ product.price }}
+                                {% if product.compare_price %}
+                                <span style="text-decoration:line-through;color:var(--text-muted);font-size:0.8rem;font-weight:300;margin-left:6px;">
+                                    £{{ product.compare_price }}
+                                </span>
+                                {% endif %}
+                            </div>
+
+                            <!-- Star rating — login required to leave a review -->
+                            <div style="margin-bottom:10px;">
+                                {% if user.is_authenticated %}
+                                <a href="{% url 'review' %}?product_id={{ product.id }}"
+                                   title="Leave a review"
+                                   style="text-decoration:none;display:inline-flex;align-items:center;gap:3px;">
+                                    <i class="fas fa-star" style="color:#C9A96E;font-size:0.75rem;"></i>
+                                    <i class="fas fa-star" style="color:#C9A96E;font-size:0.75rem;"></i>
+                                    <i class="fas fa-star" style="color:#C9A96E;font-size:0.75rem;"></i>
+                                    <i class="fas fa-star" style="color:#C9A96E;font-size:0.75rem;"></i>
+                                    <i class="far fa-star" style="color:#C9A96E;font-size:0.75rem;"></i>
+                                    <span style="font-size:0.68rem;color:var(--text-muted);margin-left:3px;">Rate this</span>
+                                </a>
+                                {% else %}
+                                <a href="{% url 'login' %}?next={% url 'review' %}%3Fproduct_id%3D{{ product.id }}"
+                                   title="Sign in to leave a review"
+                                   style="text-decoration:none;display:inline-flex;align-items:center;gap:3px;">
+                                    <i class="fas fa-star" style="color:#C9A96E;font-size:0.75rem;"></i>
+                                    <i class="fas fa-star" style="color:#C9A96E;font-size:0.75rem;"></i>
+                                    <i class="fas fa-star" style="color:#C9A96E;font-size:0.75rem;"></i>
+                                    <i class="fas fa-star" style="color:#C9A96E;font-size:0.75rem;"></i>
+                                    <i class="far fa-star" style="color:#C9A96E;font-size:0.75rem;"></i>
+                                    <span style="font-size:0.68rem;color:var(--text-muted);margin-left:3px;">(Sign in to rate)</span>
+                                </a>
+                                {% endif %}
+                            </div>
+
+                            <p class="prd-desc-preview">
+                                {{ product.description|default:"Click to view product details."|truncatechars:80 }}
+                            </p>
+
+                            <!-- Add / Remove button (toggles state) -->
+                            <div style="display:flex;gap:6px;align-items:center;">
+                                {% if product.id in cart_product_ids %}
+                                <button class="btn-remove-state"
+                                        onclick="removeFromCartBtn({{ product.id }}, this)">
+                                    Remove
+                                </button>
+                                {% else %}
+                                <button class="btn-add-state"
+                                        onclick="addToCart({{ product.id }}, this)">
+                                    Add to Bag
+                                </button>
+                                {% endif %}
+
+                                <!-- Wishlist heart button -->
+                                <button class="wishlist-btn {% if product.id in wishlist_product_ids %}wishlist-active{% endif %}"
+                                        onclick="toggleWishlist({{ product.id }}, this)"
+                                        title="Save to Wishlist">
+                                    <i class="{% if product.id in wishlist_product_ids %}fas{% else %}far{% endif %} fa-heart"></i>
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                {% endwith %}
+                {% empty %}
+                <div class="col-12 text-center py-5">
+                    <p style="color:var(--text-muted);font-family:'Cormorant Garamond',serif;font-size:1.2rem;">
+                        No products found. <a href="{% url 'homepage' %}">Clear filters</a>
+                    </p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- ══ SIDEBAR FILTERS (right column) ════════════════════ -->
+        <div class="col-lg-3 col-md-4" style="padding-left:20px;">
+
+            <!-- Filter by Category -->
+             <div style="background:var(--bg-soft);border:1px solid rgba(201,169,110,0.25);border-radius:4px;padding:20px;margin-bottom:20px;">
+                <h6 style="font-family:'Jost',sans-serif;font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--brown-dark);margin-bottom:14px;border-bottom:1px solid rgba(201,169,110,0.3);padding-bottom:8px;">
+                    <i class="fas fa-th-large" style="color:var(--gold);margin-right:6px;"></i>Categories
+                </h6>
+                <ul style="list-style:none;padding:0;margin:0;">
+                    <li style="margin-bottom:6px;">
+                        <a href="{% url 'homepage' %}#products-section" style="font-size:0.85rem;color:{% if not selected_category and not category_name %}var(--gold){% else %}var(--brown-dark){% endif %};text-decoration:none;font-family:'Jost',sans-serif;">
+                            All Products
+                        </a>
+                    </li>
+                    <li style="margin-bottom:6px;">
+                        <a href="{% url 'homepage' %}?category_name=accessories#products-section" style="font-size:0.85rem;color:{% if category_name == 'accessories' %}var(--gold){% else %}var(--brown-dark){% endif %};text-decoration:none;font-family:'Jost',sans-serif;">
+                            Accessories
+                        </a>
+                    </li>
+                    <li style="margin-bottom:6px;">
+                        <a href="{% url 'homepage' %}?category_name=haircare#products-section" style="font-size:0.85rem;color:{% if category_name == 'haircare' %}var(--gold){% else %}var(--brown-dark){% endif %};text-decoration:none;font-family:'Jost',sans-serif;">
+                            Haircare
+                        </a>
+                    </li>
+                    <li style="margin-bottom:6px;">
+                        <a href="{% url 'homepage' %}?category_name=kids#products-section" style="font-size:0.85rem;color:{% if category_name == 'kids' %}var(--gold){% else %}var(--brown-dark){% endif %};text-decoration:none;font-family:'Jost',sans-serif;">
+                            Kids
+                        </a>
+                    </li>
+                    <li style="margin-bottom:6px;">
+                        <a href="{% url 'homepage' %}?category_name=makeup#products-section" style="font-size:0.85rem;color:{% if category_name == 'makeup' %}var(--gold){% else %}var(--brown-dark){% endif %};text-decoration:none;font-family:'Jost',sans-serif;">
+                            Makeup
+                        </a>
+                    </li>
+                    <li style="margin-bottom:6px;">
+                        <a href="{% url 'homepage' %}?category_name=mens#products-section" style="font-size:0.85rem;color:{% if category_name == 'mens' %}var(--gold){% else %}var(--brown-dark){% endif %};text-decoration:none;font-family:'Jost',sans-serif;">
+                            Mens
+                        </a>
+                    </li>
+                    <li style="margin-bottom:6px;">
+                        <a href="{% url 'homepage' %}?category_name=skincare#products-section" style="font-size:0.85rem;color:{% if category_name == 'skincare' %}var(--gold){% else %}var(--brown-dark){% endif %};text-decoration:none;font-family:'Jost',sans-serif;">
+                            Skincare
+                        </a>
+                    </li>
+                    <li style="margin-bottom:6px;">
+                        <a href="{% url 'homepage' %}?category_name=wigs#products-section" style="font-size:0.85rem;color:{% if category_name == 'wigs' %}var(--gold){% else %}var(--brown-dark){% endif %};text-decoration:none;font-family:'Jost',sans-serif;">
+                            Wigs
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Filter by Price -->
+            <div style="background:var(--bg-soft);border:1px solid rgba(201,169,110,0.25);border-radius:4px;padding:20px;margin-bottom:20px;">
+                <h6 style="font-family:'Jost',sans-serif;font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--brown-dark);margin-bottom:14px;border-bottom:1px solid rgba(201,169,110,0.3);padding-bottom:8px;">
+                    <i class="fas fa-pound-sign" style="color:var(--gold);margin-right:6px;"></i>Filter by Price
+                </h6>
+                <form method="get" action="{% url 'homepage' %}" id="priceFilterForm">
+                    {% if selected_category %}<input type="hidden" name="category" value="{{ selected_category }}">{% endif %}
+                    {% if selected_gender %}<input type="hidden" name="gender" value="{{ selected_gender }}">{% endif %}
+                    {% if q %}<input type="hidden" name="q" value="{{ q }}">{% endif %}
+                    {% if brand_filter %}<input type="hidden" name="brand" value="{{ brand_filter }}">{% endif %}
+                    {% if category_name %}<input type="hidden" name="category_name" value="{{ category_name }}">{% endif %}
+                    <label style="font-size:0.78rem;color:var(--text-muted);font-family:'Jost',sans-serif;display:block;margin-bottom:6px;">
+                        Show products up to:
+                    </label>
+                    <div style="display:flex;gap:8px;align-items:center;">
+                        <span style="font-size:0.85rem;color:var(--brown-dark);">£</span>
+                        <input type="number" name="max_price" id="maxPriceInput"
+                               value="{{ max_price }}" min="0" step="0.01"
+                               placeholder="e.g. 25"
+                               style="width:100%;border:1px solid rgba(201,169,110,0.4);border-radius:3px;padding:7px 10px;font-size:0.85rem;font-family:'Jost',sans-serif;background:transparent;color:var(--brown-dark);"
+                               oninput="handlePriceInput(this)">
+                    </div>
+                    <button type="submit"
+                            style="margin-top:10px;width:100%;background:var(--gold);color:var(--brown-dark);font-family:'Jost',sans-serif;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;padding:9px 0;border:none;cursor:pointer;border-radius:3px;">
+                        Apply
+                    </button>
+                    {% if max_price %}
+                    <a href="{% url 'homepage' %}{% if selected_category %}?category={{ selected_category }}{% endif %}#products-section"
+                       style="display:block;text-align:center;margin-top:8px;font-size:0.75rem;color:var(--text-muted);font-family:'Jost',sans-serif;text-decoration:none;">
+                        Clear price filter
+                    </a>
+                    {% endif %}
+                </form>
+            </div>
+
+            <!-- Filter by Brand Name -->
+            <div style="background:var(--bg-soft);border:1px solid rgba(201,169,110,0.25);border-radius:4px;padding:20px;">
+                <h6 style="font-family:'Jost',sans-serif;font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--brown-dark);margin-bottom:14px;border-bottom:1px solid rgba(201,169,110,0.3);padding-bottom:8px;">
+                    <i class="fas fa-tag" style="color:var(--gold);margin-right:6px;"></i>Filter by Brand
+                </h6>
+                <form method="get" action="{% url 'homepage' %}" id="brandFilterForm">
+                    {% if selected_category %}<input type="hidden" name="category" value="{{ selected_category }}">{% endif %}
+                    {% if selected_gender %}<input type="hidden" name="gender" value="{{ selected_gender }}">{% endif %}
+                    {% if q %}<input type="hidden" name="q" value="{{ q }}">{% endif %}
+                    {% if max_price %}<input type="hidden" name="max_price" value="{{ max_price }}">{% endif %}
+                    {% if category_name %}<input type="hidden" name="category_name" value="{{ category_name }}">{% endif %}
+                    <label style="font-size:0.78rem;color:var(--text-muted);font-family:'Jost',sans-serif;display:block;margin-bottom:6px;">
+                        Brand name:
+                    </label>
+                    <input type="text" name="brand" value="{{ brand_filter }}"
+                           placeholder="e.g. Shea Moisture"
+                           style="width:100%;border:1px solid rgba(201,169,110,0.4);border-radius:3px;padding:7px 10px;font-size:0.85rem;font-family:'Jost',sans-serif;background:transparent;color:var(--brown-dark);">
+                    <button type="submit"
+                            style="margin-top:10px;width:100%;background:var(--gold);color:var(--brown-dark);font-family:'Jost',sans-serif;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;padding:9px 0;border:none;cursor:pointer;border-radius:3px;">
+                        Apply
+                    </button>
+                    {% if brand_filter %}
+                    <a href="{% url 'homepage' %}{% if selected_category %}?category={{ selected_category }}{% endif %}#products-section"
+                       style="display:block;text-align:center;margin-top:8px;font-size:0.75rem;color:var(--text-muted);font-family:'Jost',sans-serif;text-decoration:none;">
+                        Clear brand filter
+                    </a>
+                    {% endif %}
+                </form>
+            </div>
+
+        </div>
+        <!-- end sidebar -->
+
+    </div>
+    <!-- end product grid + sidebar row -->
+
+</section>
+
+<!-- ══ BRANDS ════════════════════════════════════════════════ -->
+<section id="brands" class="section-brands">
+    <div class="section-header">
+        <span class="eyebrow">Our Stockists</span>
+        <h2>View All Brands</h2>
+        <span class="divider"></span>
+    </div>
+    <div class="text-center">
+        <span class="brand-pill">Shea Moisture</span>
+        <span class="brand-pill">Cantu</span>
+        <span class="brand-pill">Mielle Organics</span>
+        <span class="brand-pill">ORS</span>
+        <span class="brand-pill">Kinky Curly</span>
+        <span class="brand-pill">Carol's Daughter</span>
+        <span class="brand-pill">As I Am</span>
+        <span class="brand-pill">Palmer's</span>
+        <span class="brand-pill">Aunt Jackie's</span>
+        <span class="brand-pill">Africa's Best</span>
+        <span class="brand-pill">Dark &amp; Lovely</span>
+        <span class="brand-pill">Creme of Nature</span>
+    </div>
+</section>
+
+<!-- ══ NEWSLETTER ════════════════════════════════════════════ -->
+<section id="newsletter" class="section-newsletter"
+         style="background:var(--bg-soft);margin:0 -15px;padding:60px 15px;">
+    <div class="section-header">
+        <span class="eyebrow">Stay Connected</span>
+        <h2>Subscribe &amp; Save</h2>
+        <span class="divider"></span>
+        <p>Join our community and be first to hear about new arrivals, exclusive deals, and beauty tips tailored for you.</p>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <form class="js-newsletter-form">
+                <div class="input-group">
+                    <input type="email" class="form-control" placeholder="Enter your email address…">
+                    <div class="input-group-append">
+                        <button class="btn-search" type="submit">Subscribe</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- ══ CUSTOMER REVIEWS ═══════════════════════════════════════ -->
+<section id="customer-reviews" style="padding:60px 0;">
+    <div class="section-header">
+        <span class="eyebrow">What Our Customers Say</span>
+        <h2>Real Reviews</h2>
+        <span class="divider"></span>
+        <p>Honest words from customers who love Beauty in Black.</p>
+    </div>
+
+    {% if homepage_reviews %}
+    <div class="row justify-content-center">
+        {% for review in homepage_reviews %}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div style="background:#fff;border:1px solid rgba(201,169,110,0.25);border-radius:6px;padding:28px 24px;height:100%;box-shadow:0 2px 12px rgba(44,24,16,0.06);display:flex;flex-direction:column;">
+                <div style="display:flex;gap:4px;margin-bottom:12px;">
+                    {% if review.overall_rating == 'strongly_like' %}
+                    <i class="fas fa-star" style="color:#C9A96E;font-size:0.85rem;"></i>
+                    <i class="fas fa-star" style="color:#C9A96E;font-size:0.85rem;"></i>
+                    <i class="fas fa-star" style="color:#C9A96E;font-size:0.85rem;"></i>
+                    <i class="fas fa-star" style="color:#C9A96E;font-size:0.85rem;"></i>
+                    <i class="fas fa-star" style="color:#C9A96E;font-size:0.85rem;"></i>
+                    {% elif review.overall_rating == 'like' %}
+                    <i class="fas fa-star" style="color:#C9A96E;font-size:0.85rem;"></i>
+                    <i class="fas fa-star" style="color:#C9A96E;font-size:0.85rem;"></i>
+                    <i class="fas fa-star" style="color:#C9A96E;font-size:0.85rem;"></i>
+                    <i class="fas fa-star" style="color:#C9A96E;font-size:0.85rem;"></i>
+                    <i class="far fa-star" style="color:#C9A96E;font-size:0.85rem;"></i>
+                    {% else %}
+                    <i class="fas fa-star" style="color:#C9A96E;font-size:0.85rem;"></i>
+                    <i class="fas fa-star" style="color:#C9A96E;font-size:0.85rem;"></i>
+                    <i class="far fa-star" style="color:#C9A96E;font-size:0.85rem;"></i>
+                    <i class="far fa-star" style="color:#C9A96E;font-size:0.85rem;"></i>
+                    <i class="far fa-star" style="color:#C9A96E;font-size:0.85rem;"></i>
+                    {% endif %}
+                </div>
+                {% if review.title %}
+                <h5 style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--brown-dark);margin-bottom:10px;">
+                    "{{ review.title }}"
+                </h5>
+                {% endif %}
+                <p style="font-size:0.88rem;color:var(--text-muted);line-height:1.65;flex:1;margin-bottom:16px;">
+                    {{ review.body|truncatechars:220 }}
+                </p>
+                <div style="display:flex;align-items:center;gap:10px;border-top:1px solid rgba(201,169,110,0.2);padding-top:14px;">
+                    <div style="width:36px;height:36px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:0.85rem;font-weight:600;color:var(--brown-dark);">
+                        {{ review.customer.first_name|first|upper }}
+                    </div>
+                    <div>
+                        <p style="font-family:'Jost',sans-serif;font-size:0.8rem;font-weight:600;color:var(--brown-dark);margin:0;">
+                            {{ review.customer.first_name }} {{ review.customer.last_name|first }}.
+                        </p>
+                        <p style="font-size:0.72rem;color:var(--text-muted);margin:0;">
+                            {{ review.created_at|date:"d M Y" }}
+                        </p>
+                    </div>
+                    <div style="margin-left:auto;">
+                        <i class="fas fa-check-circle" style="color:#5A9A58;font-size:0.8rem;" title="Verified customer"></i>
+                        <span style="font-size:0.7rem;color:var(--text-muted);margin-left:3px;">Verified</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% else %}
+    <div class="row justify-content-center">
+
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div style="background:#fff;border:1px solid rgba(201,169,110,0.25);border-radius:6px;padding:28px 24px;height:100%;box-shadow:0 2px 12px rgba(44,24,16,0.06);display:flex;flex-direction:column;">
+                <div style="display:flex;gap:4px;margin-bottom:12px;">
+                    <i class="fas fa-star" style="color:#C9A96E;font-size:0.85rem;"></i>
+                    <i class="fas fa-star" style="color:#C9A96E;font-size:0.85rem;"></i>
+                    <i class="fas fa-star" style="color:#C9A96E;font-size:0.85rem;"></i>
+                    <i class="fas fa-star" style="color:#C9A96E;font-size:0.85rem;"></i>
+                    <i class="fas fa-star" style="color:#C9A96E;font-size:0.85rem;"></i>
+                </div>
+                <h5 style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--brown-dark);margin-bottom:10px;">
+                    "My hair has genuinely never felt this nourished"
+                </h5>
+                <p style="font-size:0.88rem;color:var(--text-muted);line-height:1.65;flex:1;margin-bottom:16px;">
+                    I have been searching for a reliable store that truly understands my hair type for years. The Shea Moisture range I ordered arrived quickly, and after two washes I already noticed a real difference. Soft, defined curls and zero breakage. Beauty in Black has my loyalty.
+                </p>
+                <div style="display:flex;align-items:center;gap:10px;border-top:1px solid rgba(201,169,110,0.2);padding-top:14px;">
+                    <div style="width:36px;height:36px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:0.85rem;font-weight:600;color:var(--brown-dark);">A</div>
+                    <div>
+                        <p style="font-family:'Jost',sans-serif;font-size:0.8rem;font-weight:600;color:var(--brown-dark);margin:0;">Adaeze O.</p>
+                        <p style="font-size:0.72rem;color:var(--text-muted);margin:0;">London, UK</p>
+                    </div>
+                    <div style="margin-left:auto;">
+                        <i class="fas fa-check-circle" style="color:#5A9A58;font-size:0.8rem;"></i>
+                        <span style="font-size:0.7rem;color:var(--text-muted);margin-left:3px;">Verified</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div style="background:#fff;border:1px solid rgba(201,169,110,0.25);border-radius:6px;padding:28px 24px;height:100%;box-shadow:0 2px 12px rgba(44,24,16,0.06);display:flex;flex-direction:column;">
+                <div style="display:flex;gap:4px;margin-bottom:12px;">
+                    <i class="fas fa-star" style="color:#C9A96E;font-size:0.85rem;"></i>
+                    <i class="fas fa-star" style="color:#C9A96E;font-size:0.85rem;"></i>
+                    <i class="fas fa-star" style="color:#C9A96E;font-size:0.85rem;"></i>
+                    <i class="fas fa-star" style="color:#C9A96E;font-size:0.85rem;"></i>
+                    <i class="fas fa-star" style="color:#C9A96E;font-size:0.85rem;"></i>
+                </div>
+                <h5 style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--brown-dark);margin-bottom:10px;">
+                    "Finally a Black-owned space that gets it right"
+                </h5>
+                <p style="font-size:0.88rem;color:var(--text-muted);line-height:1.65;flex:1;margin-bottom:16px;">
+                    Ordered the Cantu leave-in and the Mielle rosemary oil on a Tuesday and they were at my door by Thursday. The packaging was secure and everything was exactly as described. Knowing the store is built around us makes every purchase feel personal.
+                </p>
+                <div style="display:flex;align-items:center;gap:10px;border-top:1px solid rgba(201,169,110,0.2);padding-top:14px;">
+                    <div style="width:36px;height:36px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:0.85rem;font-weight:600;color:var(--brown-dark);">T</div>
+                    <div>
+                        <p style="font-family:'Jost',sans-serif;font-size:0.8rem;font-weight:600;color:var(--brown-dark);margin:0;">Tobi A.</p>
+                        <p style="font-size:0.72rem;color:var(--text-muted);margin:0;">Birmingham, UK</p>
+                    </div>
+                    <div style="margin-left:auto;">
+                        <i class="fas fa-check-circle" style="color:#5A9A58;font-size:0.8rem;"></i>
+                        <span style="font-size:0.7rem;color:var(--text-muted);margin-left:3px;">Verified</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div style="background:#fff;border:1px solid rgba(201,169,110,0.25);border-radius:6px;padding:28px 24px;height:100%;box-shadow:0 2px 12px rgba(44,24,16,0.06);display:flex;flex-direction:column;">
+                <div style="display:flex;gap:4px;margin-bottom:12px;">
+                    <i class="fas fa-star" style="color:#C9A96E;font-size:0.85rem;"></i>
+                    <i class="fas fa-star" style="color:#C9A96E;font-size:0.85rem;"></i>
+                    <i class="fas fa-star" style="color:#C9A96E;font-size:0.85rem;"></i>
+                    <i class="fas fa-star" style="color:#C9A96E;font-size:0.85rem;"></i>
+                    <i class="fas fa-star" style="color:#C9A96E;font-size:0.85rem;"></i>
+                </div>
+                <h5 style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--brown-dark);margin-bottom:10px;">
+                    "My go-to for all things natural hair"
+                </h5>
+                <p style="font-size:0.88rem;color:var(--text-muted);line-height:1.65;flex:1;margin-bottom:16px;">
+                    The site is clean, finding what I need takes seconds, and the product range is far better than anything on the high street. The ORS olive oil cream is back in stock and I will not be caught without it again. Brilliant service from start to finish.
+                </p>
+                <div style="display:flex;align-items:center;gap:10px;border-top:1px solid rgba(201,169,110,0.2);padding-top:14px;">
+                    <div style="width:36px;height:36px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:0.85rem;font-weight:600;color:var(--brown-dark);">N</div>
+                    <div>
+                        <p style="font-family:'Jost',sans-serif;font-size:0.8rem;font-weight:600;color:var(--brown-dark);margin:0;">Nkechi B.</p>
+                        <p style="font-size:0.72rem;color:var(--text-muted);margin:0;">Manchester, UK</p>
+                    </div>
+                    <div style="margin-left:auto;">
+                        <i class="fas fa-check-circle" style="color:#5A9A58;font-size:0.8rem;"></i>
+                        <span style="font-size:0.7rem;color:var(--text-muted);margin-left:3px;">Verified</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div style="background:#fff;border:1px solid rgba(201,169,110,0.25);border-radius:6px;padding:28px 24px;height:100%;box-shadow:0 2px 12px rgba(44,24,16,0.06);display:flex;flex-direction:column;">
+                <div style="display:flex;gap:4px;margin-bottom:12px;">
+                    <i class="fas fa-star" style="color:#C9A96E;font-size:0.85rem;"></i>
+                    <i class="fas fa-star" style="color:#C9A96E;font-size:0.85rem;"></i>
+                    <i class="fas fa-star" style="color:#C9A96E;font-size:0.85rem;"></i>
+                    <i class="fas fa-star" style="color:#C9A96E;font-size:0.85rem;"></i>
+                    <i class="far fa-star" style="color:#C9A96E;font-size:0.85rem;"></i>
+                </div>
+                <h5 style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--brown-dark);margin-bottom:10px;">
+                    "Wonderful selection and fast delivery"
+                </h5>
+                <p style="font-size:0.88rem;color:var(--text-muted);line-height:1.65;flex:1;margin-bottom:16px;">
+                    I picked up three products from Carol's Daughter for my daughter and she was overjoyed. The range on here beats any chemist nearby. Would be five stars if there were bundle deals, but the quality of what I received is undeniable. Already placed a second order.
+                </p>
+                <div style="display:flex;align-items:center;gap:10px;border-top:1px solid rgba(201,169,110,0.2);padding-top:14px;">
+                    <div style="width:36px;height:36px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:0.85rem;font-weight:600;color:var(--brown-dark);">F</div>
+                    <div>
+                        <p style="font-family:'Jost',sans-serif;font-size:0.8rem;font-weight:600;color:var(--brown-dark);margin:0;">Fatou D.</p>
+                        <p style="font-size:0.72rem;color:var(--text-muted);margin:0;">Leeds, UK</p>
+                    </div>
+                    <div style="margin-left:auto;">
+                        <i class="fas fa-check-circle" style="color:#5A9A58;font-size:0.8rem;"></i>
+                        <span style="font-size:0.7rem;color:var(--text-muted);margin-left:3px;">Verified</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div style="background:#fff;border:1px solid rgba(201,169,110,0.25);border-radius:6px;padding:28px 24px;height:100%;box-shadow:0 2px 12px rgba(44,24,16,0.06);display:flex;flex-direction:column;">
+                <div style="display:flex;gap:4px;margin-bottom:12px;">
+                    <i class="fas fa-star" style="color:#C9A96E;font-size:0.85rem;"></i>
+                    <i class="fas fa-star" style="color:#C9A96E;font-size:0.85rem;"></i>
+                    <i class="fas fa-star" style="color:#C9A96E;font-size:0.85rem;"></i>
+                    <i class="fas fa-star" style="color:#C9A96E;font-size:0.85rem;"></i>
+                    <i class="fas fa-star" style="color:#C9A96E;font-size:0.85rem;"></i>
+                </div>
+                <h5 style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--brown-dark);margin-bottom:10px;">
+                    "I sent this link to every woman in my family"
+                </h5>
+                <p style="font-size:0.88rem;color:var(--text-muted);line-height:1.65;flex:1;margin-bottom:16px;">
+                    There is a care and thought behind this store that you feel the moment you land on the page. The product descriptions are honest, the imagery is beautiful, and my Aunt Jackie's order was exactly as expected. This is the kind of shopping experience we deserve.
+                </p>
+                <div style="display:flex;align-items:center;gap:10px;border-top:1px solid rgba(201,169,110,0.2);padding-top:14px;">
+                    <div style="width:36px;height:36px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:0.85rem;font-weight:600;color:var(--brown-dark);">C</div>
+                    <div>
+                        <p style="font-family:'Jost',sans-serif;font-size:0.8rem;font-weight:600;color:var(--brown-dark);margin:0;">Chiamaka E.</p>
+                        <p style="font-size:0.72rem;color:var(--text-muted);margin:0;">Bristol, UK</p>
+                    </div>
+                    <div style="margin-left:auto;">
+                        <i class="fas fa-check-circle" style="color:#5A9A58;font-size:0.8rem;"></i>
+                        <span style="font-size:0.7rem;color:var(--text-muted);margin-left:3px;">Verified</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    {% endif %}
+</section>
+
+<!-- ══ WISHLIST PANEL (off-canvas drawer) ═════════════════════ -->
+<div id="wishlistPanel" style="display:none;position:fixed;top:0;right:0;width:340px;max-width:95vw;height:100%;background:#fff;z-index:9999;box-shadow:-4px 0 24px rgba(44,24,16,0.13);overflow-y:auto;padding:24px 20px;transition:transform 0.3s ease;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;border-bottom:1px solid rgba(201,169,110,0.3);padding-bottom:14px;">
+        <h5 style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--brown-dark);margin:0;">My Wishlist</h5>
+        <button onclick="closeWishlistPanel()" style="background:none;border:none;font-size:1.3rem;color:var(--text-muted);cursor:pointer;">&times;</button>
+    </div>
+    <div id="wishlistItemsContainer">
+        <p style="color:var(--text-muted);font-size:0.85rem;text-align:center;padding:20px 0;">Loading...</p>
+    </div>
+    <div style="margin-top:16px;" id="wishlistAddAllBtn" style="display:none;">
+        <button onclick="moveAllWishlistToCart()"
+                style="width:100%;background:var(--brown-dark);color:#fff;border:none;padding:13px 0;font-family:'Jost',sans-serif;font-size:0.78rem;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;border-radius:3px;">
+            Add All to Cart
+        </button>
+    </div>
+</div>
+<div id="wishlistOverlay" onclick="closeWishlistPanel()" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(44,24,16,0.35);z-index:9998;"></div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    fetch('/ajax-cart-data/')
+        .then(function(r){ return r.json(); })
+        .then(function(data){ updateCartBadge(data.count); });
+    loadWishlistPanel();
+});
+
+function loadWishlistPanel() {
+    fetch('/ajax-wishlist-data/')
+        .then(function(r){ return r.json(); })
+        .then(function(data){ renderWishlistPanel(data.items); });
+}
+
+function renderWishlistPanel(items) {
+    var container = document.getElementById('wishlistItemsContainer');
+    if (!container) return;
+    if (!items || items.length === 0) {
+        container.innerHTML = '<p style="color:var(--text-muted);font-size:0.85rem;text-align:center;padding:20px 0;">Your wishlist is empty.</p>';
+        var btn = document.getElementById('wishlistAddAllBtn');
+        if (btn) btn.style.display = 'none';
+        return;
+    }
+    var btn = document.getElementById('wishlistAddAllBtn');
+    if (btn) btn.style.display = 'block';
+    var html = '';
+    items.forEach(function(item) {
+        html += '<div class="wishlist-item" id="wl-item-' + item.product_id + '" style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid rgba(201,169,110,0.15);">';
+        if (item.image) {
+            html += '<img src="' + item.image + '" alt="' + item.name + '" style="width:48px;height:48px;object-fit:cover;border-radius:3px;">';
+        } else {
+            html += '<div style="width:48px;height:48px;background:var(--bg-soft);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:0.6rem;color:var(--text-muted);">No img</div>';
+        }
+        html += '<div style="flex:1;">';
+        html += '<p style="margin:0;font-size:0.82rem;font-family:\'Jost\',sans-serif;color:var(--brown-dark);font-weight:500;">' + item.name + '</p>';
+        html += '<p style="margin:0;font-size:0.78rem;color:var(--text-muted);">£' + item.price + '</p>';
+        html += '</div>';
+        html += '<div style="display:flex;flex-direction:column;gap:5px;">';
+        html += '<button onclick="moveWishlistItemToCart(' + item.product_id + ')" style="background:var(--gold);color:var(--brown-dark);border:none;padding:5px 10px;font-size:0.7rem;font-family:\'Jost\',sans-serif;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;border-radius:2px;">Add to Cart</button>';
+        html += '<button onclick="removeWishlistItem(' + item.product_id + ')" style="background:transparent;color:var(--text-muted);border:1px solid rgba(201,169,110,0.3);padding:4px 10px;font-size:0.7rem;font-family:\'Jost\',sans-serif;cursor:pointer;border-radius:2px;">Remove</button>';
+        html += '</div>';
+        html += '</div>';
+    });
+    container.innerHTML = html;
+}
+
+function moveWishlistItemToCart(productId) {
+    fetch('/ajax-wishlist-to-cart/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-CSRFToken': getCookie('csrftoken') },
+        body: JSON.stringify({ product_id: productId })
+    })
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+        if (data.success) { updateCartBadge(data.cart_count); loadWishlistPanel(); showToast('Added to your cart!'); }
+    });
+}
+
+function moveAllWishlistToCart() {
+    fetch('/ajax-wishlist-to-cart/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-CSRFToken': getCookie('csrftoken') },
+        body: JSON.stringify({ move_all: true })
+    })
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+        if (data.success) { updateCartBadge(data.cart_count); loadWishlistPanel(); showToast('All wishlist items added to your cart!'); }
+    });
+}
+
+function removeWishlistItem(productId) {
+    fetch('/ajax-remove-from-wishlist/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-CSRFToken': getCookie('csrftoken') },
+        body: JSON.stringify({ product_id: productId })
+    })
+    .then(function(r){ return r.json(); })
+    .then(function(data){ if (data.success) { loadWishlistPanel(); } });
+}
+
+function handlePriceInput(el) { /* clear link handles reset */ }
+
+function openWishlistPanel() {
+    var panel = document.getElementById('wishlistPanel');
+    var overlay = document.getElementById('wishlistOverlay');
+    if (panel) { panel.style.display = 'block'; panel.style.transform = 'translateX(0)'; }
+    if (overlay) overlay.style.display = 'block';
+    loadWishlistPanel();
+}
+
+function closeWishlistPanel() {
+    var panel = document.getElementById('wishlistPanel');
+    var overlay = document.getElementById('wishlistOverlay');
+    if (panel) panel.style.display = 'none';
+    if (overlay) overlay.style.display = 'none';
+}
+
+function getCookie(name) {
+    var value = '; ' + document.cookie;
+    var parts = value.split('; ' + name + '=');
+    if (parts.length === 2) return parts.pop().split(';').shift();
+    return '';
+}
+</script>
+{% endblock %}

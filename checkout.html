@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<h2 class="mb-4">Checkout</h2>
+
+{% if cart_items %}
+<div class="row">
+    <div class="col-lg-8">
+        <h5>Order Summary</h5>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Qty</th>
+                    <th>Price</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart_items %}
+                <tr>
+                    <td>{{ item.product.name }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>£{{ item.product.price }}</td>
+                    <td>£{{ item.subtotal }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <h4 class="text-end">Total: £{{ total }}</h4>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Delivery Details</h5>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label class="form-label">Delivery Address</label>
+                        <textarea name="address" class="form-control" rows="3" required placeholder="Full delivery address"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Phone Number</label>
+                        <input type="tel" name="phone" class="form-control" required placeholder="+44 ...">
+                    </div>
+                    <button type="submit" class="btn btn-success btn-lg w-100">Pay with Stripe →</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+<p class="text-center lead">No items in cart. <a href="{% url 'homepage' %}">Go shopping</a></p>
+{% endif %}
+{% endblock %}

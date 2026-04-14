@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<h2 class="mb-4">Your Orders</h2>
+
+{% if orders %}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Address</th>
+            <th>Date</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for order in orders %}
+        <tr>
+            <td>{{ order.product.name }}</td>
+            <td>{{ order.quantity }}</td>
+            <td>£{{ order.price }}</td>
+            <td>{{ order.address|default:"—" }}</td>
+            <td>{{ order.created_at|date:"d M Y H:i" }}</td>
+            <td>
+                {% if order.paid %}
+                <span class="badge bg-success">Paid</span>
+                {% else %}
+                <span class="badge bg-warning">Pending</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="alert alert-info text-center">
+    You haven't placed any orders yet.
+</div>
+{% endif %}
+{% endblock %}

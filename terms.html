@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Terms & Conditions | Beauty In Black{% endblock %}
+
+{% block content %}
+<div style="background: linear-gradient(135deg, #2C1810 0%, #6B3F2A 60%, #C9A96E 100%); padding: 50px 0 35px;">
+  <div class="container text-center text-light">
+    <h1 style="font-family: 'Cormorant Garamond', serif; font-size: 3rem;">Terms &amp; Conditions</h1>
+    <p class="mb-0" style="color: #f0d9c0;">Last updated: April 2026</p>
+  </div>
+</div>
+
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-9">
+
+      <div class="mb-5">
+        <p class="text-muted">
+          Please read these Terms and Conditions carefully before using the Beauty In Black website. By placing an order or using our services, you agree to be bound by these terms.
+        </p>
+      </div>
+
+      <h4 style="font-family: 'Cormorant Garamond', serif; color: #6A1B9A;">1. About Us</h4>
+      <p class="text-muted">Beauty In Black is an online retailer based in Ealing, London, United Kingdom, specialising in premium Afro hair care, wigs, and beauty products.</p>
+
+      <hr class="my-4">
+
+      <h4 style="font-family: 'Cormorant Garamond', serif; color: #6A1B9A;">2. Orders &amp; Payment</h4>
+      <p class="text-muted">All orders are subject to acceptance and availability. We reserve the right to refuse or cancel any order at our discretion. Payments are processed securely via Stripe. All prices are displayed in Great British Pounds (£) and include VAT where applicable.</p>
+
+      <hr class="my-4">
+
+      <h4 style="font-family: 'Cormorant Garamond', serif; color: #6A1B9A;">3. Delivery</h4>
+      <p class="text-muted">We aim to dispatch all orders within 1–3 business days. Delivery times may vary depending on your location and the shipping method selected at checkout. Beauty In Black is not responsible for delays caused by third-party couriers.</p>
+
+      <hr class="my-4">
+
+      <h4 style="font-family: 'Cormorant Garamond', serif; color: #6A1B9A;">4. Returns &amp; Refunds</h4>
+      <p class="text-muted">Please refer to our <a href="{% url 'returns_policy' %}" style="color: #6A1B9A;">Returns Policy</a> for full details on how to return an item and eligibility for a refund.</p>
+
+      <hr class="my-4">
+
+      <h4 style="font-family: 'Cormorant Garamond', serif; color: #6A1B9A;">5. Intellectual Property</h4>
+      <p class="text-muted">All content on this website, including but not limited to text, images, logos, and product descriptions, is the property of Beauty In Black and may not be reproduced without written permission.</p>
+
+      <hr class="my-4">
+
+      <h4 style="font-family: 'Cormorant Garamond', serif; color: #6A1B9A;">6. Privacy</h4>
+      <p class="text-muted">Your personal data is handled in accordance with our <a href="{% url 'cookie_policy' %}" style="color: #6A1B9A;">Cookie Policy</a>. We do not sell your data to third parties.</p>
+
+      <hr class="my-4">
+
+      <h4 style="font-family: 'Cormorant Garamond', serif; color: #6A1B9A;">7. Limitation of Liability</h4>
+      <p class="text-muted">Beauty In Black shall not be liable for any indirect or consequential losses arising from the use of our website or products, to the fullest extent permitted by law.</p>
+
+      <hr class="my-4">
+
+      <h4 style="font-family: 'Cormorant Garamond', serif; color: #6A1B9A;">8. Governing Law</h4>
+      <p class="text-muted">These terms are governed by the laws of England and Wales. Any disputes shall be subject to the exclusive jurisdiction of the courts of England and Wales.</p>
+
+      <hr class="my-4">
+
+      <h4 style="font-family: 'Cormorant Garamond', serif; color: #6A1B9A;">9. Changes to These Terms</h4>
+      <p class="text-muted">We reserve the right to update these Terms and Conditions at any time. Continued use of the website after changes constitutes acceptance of the new terms.</p>
+
+      <hr class="my-4">
+
+      <p class="text-muted">If you have any questions about these terms, please <a href="{% url 'contact' %}" style="color: #6A1B9A;">contact us</a>.</p>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

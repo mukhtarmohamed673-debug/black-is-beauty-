@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About Us | Beauty In Black{% endblock %}
+
+{% block content %}
+<!-- Hero -->
+<div style="background: linear-gradient(135deg, #2C1810 0%, #6B3F2A 60%, #C9A96E 100%); padding: 70px 0 50px;">
+  <div class="container text-center text-light">
+    <h1 style="font-family: 'Cormorant Garamond', serif; font-size: 3.2rem;">About Beauty In Black</h1>
+    <p class="lead mb-0" style="color: #f0d9c0;">Celebrating melanin-rich beauty, one product at a time.</p>
+  </div>
+</div>
+
+<div class="container py-5">
+
+  <!-- Our Story -->
+  <div class="row align-items-center mb-5">
+    <div class="col-md-6 mb-4 mb-md-0">
+      <div style="background: linear-gradient(135deg, #6A1B9A22, #C9A96E22); border-left: 4px solid #6A1B9A; padding: 40px; border-radius: 0 8px 8px 0;">
+        <span class="text-warning text-uppercase small" style="letter-spacing: 2px;">Our Story</span>
+        <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 2.2rem;" class="mt-2 mb-3">
+          Born from passion, built for you
+        </h2>
+        <p class="text-muted">
+          Beauty In Black was founded in Ealing, London, with one mission: to create a space where Black women, men, and children could find premium hair care, skincare, and beauty products made for and celebrating melanin-rich skin and hair textures.
+        </p>
+        <p class="text-muted mb-0">
+          We believe that beauty is not one-size-fits-all. That's why every product in our store is hand-picked, tested, and curated with our community in mind.
+        </p>
+      </div>
+    </div>
+    <div class="col-md-6 text-center">
+      <div style="background: #f8f4f0; height: 280px; display:flex; align-items:center; justify-content:center; border-radius: 8px;">
+        <div style="font-size: 5rem;">✊🏿</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Values -->
+  <div class="text-center mb-5">
+    <span class="text-warning text-uppercase small" style="letter-spacing: 2px;">What We Stand For</span>
+    <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 2rem;" class="mt-2">Our Values</h2>
+    <div style="width: 50px; height: 2px; background: #C9A96E; margin: 15px auto;"></div>
+  </div>
+
+  <div class="row text-center mb-5">
+    <div class="col-md-4 mb-4">
+      <div class="p-4">
+        <div class="mb-3" style="font-size: 2.5rem; color: #6A1B9A;"><i class="fas fa-heart"></i></div>
+        <h5 style="font-family: 'Cormorant Garamond', serif;">Community First</h5>
+        <p class="text-muted">We exist to serve our community. Every decision we make is guided by what's best for the people who shop with us.</p>
+      </div>
+    </div>
+    <div class="col-md-4 mb-4">
+      <div class="p-4">
+        <div class="mb-3" style="font-size: 2.5rem; color: #6A1B9A;"><i class="fas fa-star"></i></div>
+        <h5 style="font-family: 'Cormorant Garamond', serif;">Premium Quality</h5>
+        <p class="text-muted">We only stock products we believe in — tried, tested, and worthy of your crown.</p>
+      </div>
+    </div>
+    <div class="col-md-4 mb-4">
+      <div class="p-4">
+        <div class="mb-3" style="font-size: 2.5rem; color: #6A1B9A;"><i class="fas fa-leaf"></i></div>
+        <h5 style="font-family: 'Cormorant Garamond', serif;">Conscious Beauty</h5>
+        <p class="text-muted">We champion brands that are ethical, cruelty-free, and transparent about their ingredients.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="text-center py-4" style="border-top: 1px solid #eee;">
+    <h4 style="font-family: 'Cormorant Garamond', serif;" class="mb-3">Ready to explore our collection?</h4>
+    <a href="{% url 'homepage' %}" class="btn btn-dark rounded-0 px-5 text-uppercase mr-3">Shop Now</a>
+    <a href="{% url 'contact' %}" class="btn btn-outline-dark rounded-0 px-5 text-uppercase">Get In Touch</a>
+  </div>
+
+</div>
+{% endblock %}
